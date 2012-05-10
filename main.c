@@ -19,6 +19,7 @@ void vaciar_grilla(void);
 void mostrar_grilla(void);
 int cargar_palabra(void);
 void resultados(void);
+void elegir_palabras(void);
 
 // Funcion main
 int main(void) {
@@ -56,7 +57,10 @@ void jugar(){
 	printf("Elegiste Horizontal, muy bien\n");
 	sentido='H';
 	vaciar_grilla();
+	elegir_palabras();
+
 	mostrar_grilla();
+	
 	while (cargar_palabra());
 	resultados();
 }
@@ -82,6 +86,13 @@ void mostrar_grilla(){
 		}
 		printf("\n");
 	}
+	//Mostramos las definiciones de la grilla.
+	for(i=0;i<TG;i++){
+		for(j=0; j<2; j++){
+			printf("Fila %d - Pal %d: %s \n", i, j, def[respuestas[i][j]]);
+		}
+	}
+
 }
 
 int cargar_palabra(){
@@ -91,5 +102,13 @@ int cargar_palabra(){
 
 void resultados(){
 	printf("Muy bien...\n");
+}
+
+void elegir_palabras() {
+	int i;
+	for(i=0;i<TG;i++) {
+		respuestas[i][0] = 0;
+		respuestas[i][1] = 0;
+	}
 }
 
