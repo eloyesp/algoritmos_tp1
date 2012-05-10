@@ -92,12 +92,33 @@ void mostrar_grilla(){
 			printf("Fila %d - Pal %d: %s \n", i, j, def[respuestas[i][j]]);
 		}
 	}
-
 }
 
 int cargar_palabra(){
-	printf("Veo que aun no estas listo para cargar ninguna palabra 'T'...\n");
-	return 0;
+	int fila, n, i;
+	char c, palabra[10];
+	printf("Ingrese la fila. (o -1 para salir)");
+	scanf("%d",&fila);
+	printf("Que palabra va a ingresar (1 = primera, 2 = segunda): ");
+	scanf("%d", &n);
+	if (fila - 1 >= 0 && fila - 1  < TG) {
+		printf("Ingrese la palabra (de 3 letras): ");
+		i = 0;
+		while (i < 5 && (c = getchar()) != '\n' && c != '\0') {
+			palabra[i] = c;
+			i++;
+		}
+		palabra[i+1] = '\0';
+		
+		i = 0;
+		while (palabra[i] != '\0' && palabra[i] != '\n') {
+			grilla[0][i] = palabra [i];
+		}
+		return 1;
+	} else {
+		printf("Veo que aun no estas listo para cargar ninguna palabra 'T'...\n");
+		return 0;
+	}
 }
 
 void resultados(){
