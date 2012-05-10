@@ -17,10 +17,12 @@ void jugar(void);
 void despedida(void);
 void vaciar_grilla(void);
 void mostrar_grilla(void);
-	
+int cargar_palabra(void);
+void resultados(void);
+
 // Funcion main
 int main(void) {
-
+	cargar_diccionario();
 	bienvenida();
 
 	while (menu())
@@ -55,6 +57,8 @@ void jugar(){
 	sentido='H';
 	vaciar_grilla();
 	mostrar_grilla();
+	while (cargar_palabra());
+	resultados();
 }
 
 void despedida(){
@@ -78,5 +82,14 @@ void mostrar_grilla(){
 		}
 		printf("\n");
 	}
+}
+
+int cargar_palabra(){
+	printf("Veo que aun no estas listo para cargar ninguna palabra 'T'...\n");
+	return 0;
+}
+
+void resultados(){
+	printf("Muy bien...\n");
 }
 
