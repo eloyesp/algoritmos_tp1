@@ -29,3 +29,27 @@ int main(void) {
 	return 0;
 }
 
+void bienvenida(){
+	printf("Hola...\n");
+}
+
+//menu elije entre jugar o salir.
+int menu(){
+	int opcion;
+	printf("Si desea jugar ingrese 1 sino 0:\n");
+	scanf("%d",&opcion);
+	
+	if (opcion==1)
+		return 1;
+	else
+		return 0;
+}
+
+void jugar(){
+	printf("Un juego\n");
+	
+}
+void despedida(){
+	printf("Chau\n");
+}
+
