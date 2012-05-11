@@ -1,6 +1,8 @@
 // Tamanio de la grilla
 # define TG 10
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "palydef.h"
 
 // variables globales:
