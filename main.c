@@ -43,7 +43,7 @@ int menu(){
 	int opcion;
 	printf("Si desea jugar ingrese 1 sino 0:\n");
 	scanf("%d",&opcion);
-	
+
 	if (opcion==1)
 		return 1;
 	else
@@ -60,7 +60,7 @@ void jugar(){
 	elegir_palabras();
 
 	mostrar_grilla();
-	
+
 	while (cargar_palabra());
 	resultados();
 }
@@ -94,25 +94,38 @@ void mostrar_grilla(){
 	}
 }
 
+// Solicita al usuario el ingreso de una palabra del crucigrama.
+// retorna 0 si el usuario desea terminar.
 int cargar_palabra(){
 	int fila, n, i;
-	char c, palabra[10];
-	printf("Ingrese la fila. (o -1 para salir)");
+	char c, palabra[6];
+	printf("Ingrese la fila. (o -1 para salir): ");
 	scanf("%d",&fila);
+	while (getchar() != '\n'); // Limpio el buffer
 	printf("Que palabra va a ingresar (1 = primera, 2 = segunda): ");
 	scanf("%d", &n);
+	while (getchar() != '\n'); // Limpio el buffer
 	if (fila - 1 >= 0 && fila - 1  < TG) {
 		printf("Ingrese la palabra (de 3 letras): ");
 		i = 0;
-		while (i < 5 && (c = getchar()) != '\n' && c != '\0') {
+		while (i < 6 && (c = getchar()) != '\n') {
 			palabra[i] = c;
 			i++;
 		}
-		palabra[i+1] = '\0';
-		
-		i = 0;
-		while (palabra[i] != '\0' && palabra[i] != '\n') {
-			grilla[0][i] = palabra [i];
+		if (i >= 6) {
+			printf("Ingresaste muchas letras");
+			while (getchar() != '\n'); // Limpio el buffer
+		} else {
+			// corto la palabra
+			palabra[i] = '\0';
+			if (strlen(palabra) == 3) {
+				i = 0;
+				while (palabra[i] != '\0') {
+					grilla[0][i] = palabra [i];
+				}
+			} else {
+				printf("Ingresaste pocas letras");
+			}
 		}
 		return 1;
 	} else {
