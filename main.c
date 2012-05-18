@@ -21,6 +21,7 @@ void jugar(void);
 void despedida(void);
 void vaciar_grilla(void);
 void mostrar_grilla(void);
+char guion_asterisco(const int i, const int j);
 int cargar_palabra(void);
 void resultados(void);
 void elegir_palabras(void);
@@ -40,6 +41,21 @@ int main(void) {
 }
 
 void bienvenida(){
+	int i;
+	system("cls");
+	
+	for (i=0;i<80*2;i++){
+		printf("#");
+	}
+	
+	printf("\n\nBievenido a el crucigrama horizontal y vertical,"
+		"\n          un crucigrama con 2 grandes opciones..."
+		"\n          horizontal y vertical ! XD\n\n");
+	
+	for (i=0;i<80*2;i++){
+		printf("#");
+	}
+	system("pause");
 }
 
 //menu elije entre jugar o salir.
@@ -103,6 +119,33 @@ void despedida(){
 }
 
 void vaciar_grilla(){
+	int i, j;
+	for (i=0; i<10; i++) {
+		for (j=0; j<10; j++) {
+			grilla[i][j] = guion_asterisco(i, j);
+		}
+	}
+}
+
+char guion_asterisco(const int i, const int j)
+/** retorna - o * segun corresponda a la fila y columna.
+	*/
+{
+	char value;
+	if (j < 3 || j > 5)
+		value = '-';
+	else if (j > 3 && j < 6)
+		value = '*';
+	else {
+		if ((i % 2) == 0)
+			value = '-';
+		else
+			value = '*';
+	}
+	return value;
+}
+	
+void mostrar_grilla(){
 	int i,j;
 	
 	printf("----****----****----**** Crucigrama Horizontal ****----****----****----\n");
@@ -127,10 +170,7 @@ void vaciar_grilla(){
 		}
 		printf("\n");
 	}
-}
-
-void mostrar_grilla(){
-	int i,j;
+	
 	for(i=0;i<TG;i++){
 		for(j=0;j<TG;j++){
 			printf(" %c ", grilla[i][j]);
