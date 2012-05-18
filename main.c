@@ -40,27 +40,29 @@ int main(void) {
 }
 
 void bienvenida(){
-	int opcion;
-	
-	printf("----****----****----****  Crucigrama Horizontal o Vertical  ****----****----****----");
-	printf("\n\n\n\n");
-	printf("                          Menu principal\n");
-	printf("                          1) Jugar.\n\n");
-	printf("                          2) Salir.\n\n");
-	printf("                      Ingrese una opcion valida:\n\n");
-	scanf("%d",&opcion);
-	
-	while(opcion!=1 && opcion!=2){
-		printf("Ingreso una opcion incorrecta.\nIngrese nuevamente la opcion que desea:\n");
-		scanf("%d",&opcion);
-	}
 }
 
 //menu elije entre jugar o salir.
 int menu(){
 	int opcion;
-	printf("Si desea jugar ingrese 1 sino 0:\n");
-	scanf("%d",&opcion);
+	char entrada[3];
+	// Limpiar la pantalla
+	system("cls");
+	
+	printf("---****----****----**** Crucigrama Horizontal o Vertical ****----****----****---");
+	printf("\n\n\n\n");
+	printf("                          Menu principal\n");
+	printf("                          1) Jugar.\n\n");
+	printf("                          2) Salir.\n\n");
+	printf("                      Ingrese una opcion valida:\n\n");
+	read_line(entrada, 3);
+	opcion = atoi(entrada);
+	
+	while(opcion!=1 && opcion!=2){
+		printf("Ingreso una opcion incorrecta.\nIngrese nuevamente la opcion que desea:\n");
+		read_line(entrada, 3);
+		opcion = atoi(entrada);
+	}
 	
 	if (opcion==1)
 		return 1;
@@ -84,7 +86,20 @@ void jugar(){
 }
 
 void despedida(){
-	printf("Chau\n");
+	int i;
+	system("cls");
+	
+	for (i=0;i<80*2;i++){
+		printf("#");
+	}
+	
+	printf("\n\nMUCHAS GRACIAS POR JUGAR..."
+		"\n          RECUERDE QUE EN ESTE JUEGO GANA EL MAS PERSISTENTE"
+		"\n          PERSISTE Y VENCERAS...! XD\n\n");
+	
+	for (i=0;i<80*2;i++){
+		printf("#");
+	}
 }
 
 void vaciar_grilla(){
