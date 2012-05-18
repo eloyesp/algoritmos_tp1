@@ -40,7 +40,20 @@ int main(void) {
 }
 
 void bienvenida(){
-	printf("Hola...\n");
+	int opcion;
+	
+	printf("----****----****----****  Crucigrama Horizontal o Vertical  ****----****----****----");
+	printf("\n\n\n\n");
+	printf("                          Menu principal\n");
+	printf("                          1) Jugar.\n\n");
+	printf("                          2) Salir.\n\n");
+	printf("                      Ingrese una opcion valida:\n\n");
+	scanf("%d",&opcion);
+	
+	while(opcion!=1 && opcion!=2){
+		printf("Ingreso una opcion incorrecta.\nIngrese nuevamente la opcion que desea:\n");
+		scanf("%d",&opcion);
+	}
 }
 
 //menu elije entre jugar o salir.
@@ -76,10 +89,28 @@ void despedida(){
 
 void vaciar_grilla(){
 	int i,j;
-	for (i=0;i<TG;i++){
-		for (j=0;j<TG;j++){
-			grilla[i][j] = '-';
+	
+	printf("----****----****----**** Crucigrama Horizontal ****----****----****----\n");
+	printf("\n\n");
+	
+	for(i=1;i<11;i++){
+		printf("                    %2d)",i);
+		for(j=1;j<13;j++){
+			if(i%2!=0){
+				if(j<5 || j>6)
+					printf(" -");
+				else
+					printf(" *");					
+			}
+			else{
+				if(j<4 || j>6)
+					printf(" -");
+				else
+					printf(" *");	
+			}
+			
 		}
+		printf("\n");
 	}
 }
 
