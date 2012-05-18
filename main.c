@@ -26,6 +26,7 @@ int cargar_palabra(void);
 void resultados(void);
 void elegir_palabras(void);
 char * read_line (char * buf, size_t length);
+int ya_esta(const int valor, const int index);
 
 // Funcion main
 int main(void) {
@@ -120,8 +121,8 @@ void despedida(){
 
 void vaciar_grilla(){
 	int i, j;
-	for (i=0; i<10; i++) {
-		for (j=0; j<10; j++) {
+	for (i=0; i<TG; i++) {
+		for (j=0; j<TG; j++) {
 			grilla[i][j] = guion_asterisco(i, j);
 		}
 	}
@@ -147,42 +148,25 @@ char guion_asterisco(const int i, const int j)
 	
 void mostrar_grilla(){
 	int i,j;
-	
+	system("cls");
 	printf("----****----****----**** Crucigrama Horizontal ****----****----****----\n");
 	printf("\n\n");
 	
-	for(i=1;i<11;i++){
-		printf("                    %2d)",i);
-		for(j=1;j<13;j++){
-			if(i%2!=0){
-				if(j<5 || j>6)
-					printf(" -");
-				else
-					printf(" *");					
-			}
-			else{
-				if(j<4 || j>6)
-					printf(" -");
-				else
-					printf(" *");	
-			}
-			
-		}
-		printf("\n");
-	}
-	
-	for(i=0;i<TG;i++){
-		for(j=0;j<TG;j++){
+	for (i=0;i<TG;i++) {
+		printf("                    %2d)", i+1);
+		for (j=0; j<TG; j++) {
 			printf(" %c ", grilla[i][j]);
 		}
 		printf("\n");
 	}
+	printf("\nDefiniciones:\n");
 	//Mostramos las definiciones de la grilla.
-	for(i=0;i<TG;i++){
-		for(j=0; j<2; j++){
-			printf("Fila %d - Pal %d: %s \n", i, j, def[respuestas[i][j]]);
+	for (i=0;i<TG;i++) {
+		for(j=0; j<2; j++) {
+			printf("Fila %d - Pal %d: %s | ", i, j, def[respuestas[i][j]]);
 		}
 	}
+	printf("\n");
 }
 
 int cargar_palabra(){
@@ -212,16 +196,32 @@ int cargar_palabra(){
 	}
 }
 
-void resultados(){
+void resultados()
+{
 	printf("Muy bien...\n");
 }
 
-void elegir_palabras() {
-	int i;
-	for(i=0;i<TG;i++) {
-		respuestas[i][0] = 0;
-		respuestas[i][1] = 0;
+void elegir_palabras()
+{
+	int i,aux;
+	for (i=0; i<TG*2; i++) {
+		do {
+			aux = rand()%50;
+		} while ( ya_esta(aux, i) );
+		
+		respuestas[0][i] = aux;
 	}
+}
+
+int ya_esta(const int valor, const int index)
+/** retorna verdadero si el valor ya esta en la matriz y falso si no esta.
+	*/
+{
+	int i=0;
+	while (valor!=respuestas[0][i] && i<index) {
+		i++;
+	}
+	return (valor == respuestas[0][i]);
 }
 
 // Robado de home.datacomm.ch/t_wolf/tw/c/getting_input.html#skip
