@@ -1,16 +1,20 @@
 // Tamanio de la grilla
-# define TG 10
+#define TG 10
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "palydef.h"
 
-// variables globales:
+/**
+  Variables globales:
+*/
 char sentido;             // sentido en el que se juega el crucigrama. Que puede ser H O V.
 char grilla[TG][TG];      // letras escritas en la grilla.
 int respuestas[TG][2];    // listado de palabras elegidas al azar.
 
-// Funciones
+/**
+  Prototipos de Funciones
+*/
 void bienvenida(void);
 int menu(); // retorna falso si el usuario elige terminar ('t' o 'T')
 void jugar(void);
@@ -20,6 +24,7 @@ void mostrar_grilla(void);
 int cargar_palabra(void);
 void resultados(void);
 void elegir_palabras(void);
+char * read_line (char * buf, size_t length);
 
 // Funcion main
 int main(void) {
@@ -133,3 +138,30 @@ void elegir_palabras() {
 	}
 }
 
+// Robado de home.datacomm.ch/t_wolf/tw/c/getting_input.html#skip
+
+char * read_line (char * buf, size_t length)
+	/**** Read at most 'length'-1 characters from the file 'f' into
+	'buf' and zero-terminate this character sequence. If the
+	line contains more characters, discard the rest.
+	*/
+{
+	char *p;
+	
+	if ((p = fgets (buf, length, stdin))) {
+		size_t last = strlen (buf) - 1;
+		
+		if (buf[last] == '\n') {
+			/**** Discard the trailing newline */
+			buf[last] = '\0';
+		} else {
+			/**** There's no newline in the buffer, therefore there must be
+			more characters on that line: discard them!
+			*/
+			fscanf (stdin, "%*[^\n]");
+			/**** And also discard the newline... */
+			(void) fgetc (stdin);
+		} /* end if */
+	} /* end if */
+	return p;
+} /* end read_line */
