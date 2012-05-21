@@ -173,7 +173,7 @@ void mostrar_grilla() {
 	//Mostramos las definiciones de la grilla.
 	for (i=0;i<TG;i++) {
 		for(j=0; j<2; j++) {
-			printf("Fila %d - Pal %d: %s | ", i, j, def[respuestas[i][j]]);
+			printf("Fila %d - Pal %d: %s | ", i+1, j+1, def[respuestas[i][j]]);
 		}
 	}
 	printf("\n");
@@ -248,13 +248,15 @@ void resultados() {
 void elegir_palabras() {
 	/** Elige aleatoriamiente las palabras para llenar el crucigrama.
 	*/
-	int i,aux;
-	for (i=0; i<TG*2; i++) {
-		do {
-			aux = rand()%50;
-		} while ( ya_esta(aux, i) );
+	int i, j, aux;
+	for (i=0; i<TG; i++) {
+		for (j=0; j<2; j++) {
+			do {
+				aux = (de_tres_letras(i, j)) ? rand()%20 : rand()%30+20;
+			} while ( ya_esta(aux, i + 10*j) );
 
-		respuestas[0][i] = aux;
+			respuestas[i][j] = aux;
+		}
 	}
 }
 
