@@ -187,8 +187,8 @@ int cargar_palabra() {
 
 	printf("Ingrese la fila: ");
 	read_line(ingreso, TI);
-	while (atoi(ingreso) > 10 || (( atoi(ingreso) < 1 && ingreso[0] != 't'
-		&& ingreso[0] != 'T') && ingreso[1] != '\0')) {
+	while (!((atoi(ingreso) <= 10 && atoi(ingreso) >= 1) || ((ingreso[0] == 't'
+		|| ingreso[0] == 'T') && ingreso[1] == '\0'))) {
 		printf("Ingrese la fila (entre 1 y 10) ('T' para terminar): ");
 		read_line(ingreso, TI);
 	}
@@ -196,8 +196,8 @@ int cargar_palabra() {
 		fila = atoi(ingreso) - 1;
 		printf("Ingrese el numero de palabra: ");
 		read_line(ingreso, TI);
-		while (atoi(ingreso) > 2 || atoi(ingreso) < 1 && ((ingreso[0] != 't')
-			&& (ingreso[0] != 'T')) || ingreso[1] != '\0') {
+		while (!((atoi(ingreso) <= 2 && atoi(ingreso) >= 1) || ((
+			ingreso[0] == 't' || ingreso[0] == 'T') && ingreso[1] == '\0'))) {
 				printf("Ingrese el numero de palabra. (1 o 2) ('T' para terminar): ");
 				read_line(ingreso, TI);
 			}
