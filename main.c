@@ -1,5 +1,6 @@
 // Tamanio de la grilla
-#define TG 10
+#define TG 10 // tamanio de la grilla
+#define SP 6  // inicio de la segunda palabra
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,6 +24,7 @@ void vaciar_grilla(void);
 void mostrar_grilla(void);
 char guion_asterisco(const int i, const int j);
 int cargar_palabra(void);
+int de_tres_letras(const int fila, const int columna);
 void resultados(void);
 void elegir_palabras(void);
 char * read_line (char * buf, size_t length);
@@ -181,7 +183,7 @@ int cargar_palabra() {
 	/** Permite al usuario cargar una palabra en el crucigrama.
 	*/
 #define TI 6
-	int fila, columna, cantidad_de_letras, i=0;
+	int fila, columna, cantidad_de_letras, i=0, d;
 	char ingreso[TI];
 
 	printf("Ingrese la fila: ");
@@ -202,8 +204,8 @@ int cargar_palabra() {
 			}
 		if ((ingreso[0] != 't') && (ingreso[0] != 'T')) {
 			columna = atoi(ingreso) - 1;
-			//cantidad_de_letras = cantidad_de_letras(fila, columna);
-			cantidad_de_letras = 3;
+			d = (columna == 0) ? 0 : SP;
+			cantidad_de_letras = (de_tres_letras(fila, columna)) ? 3 : 4;
 
 			printf("Ingrese la Palabra: ");
 			read_line(ingreso, TI);
@@ -213,7 +215,7 @@ int cargar_palabra() {
 				}
 			// Ingreso la palabra en el crucigrama.
 			for (i=0; i < cantidad_de_letras; i++) {
-				grilla[fila][i] = ingreso[i];
+				grilla[fila][i+d] = ingreso[i];
 			}
 		}
 	}
@@ -221,6 +223,22 @@ int cargar_palabra() {
 	return i; // i es 0 exepto que se halla cargado una palabra.
 }
 
+int de_tres_letras(const int i, const int j) {
+	/** Verdadero si la cantidad de letras que tiene la palabra correspondiente
+	    Es 3.
+	*/
+	int es_tres;
+	if (j != 0) {
+		es_tres = 0;
+	} else {
+		if ((i % 2) == 0)
+			es_tres = 0;
+		else
+			es_tres = 1;
+	}
+
+	return es_tres;
+}
 void resultados() {
 	/** Indica al usuario el puntaje obtenido, asi como sus aciertos y errores.
 	*/
