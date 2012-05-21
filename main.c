@@ -101,7 +101,9 @@ void jugar() {
 
 	mostrar_grilla();
 
-	while (cargar_palabra());
+	while (cargar_palabra()) {
+		mostrar_grilla();
+	}
 	resultados();
 }
 
@@ -178,30 +180,45 @@ void mostrar_grilla() {
 int cargar_palabra() {
 	/** Permite al usuario cargar una palabra en el crucigrama.
 	*/
-	int fila, n, i;
-	char c, palabra[10];
-	printf("Ingrese la fila. (o -1 para salir)");
-	scanf("%d",&fila);
-	printf("Que palabra va a ingresar (1 = primera, 2 = segunda): ");
-	scanf("%d", &n);
-	if (fila - 1 >= 0 && fila - 1  < TG) {
-		printf("Ingrese la palabra (de 3 letras): ");
-		i = 0;
-		while (i < 5 && (c = getchar()) != '\n' && c != '\0') {
-			palabra[i] = c;
-			i++;
-		}
-		palabra[i+1] = '\0';
+#define TI 6
+	int fila, columna, cantidad_de_letras, i=0;
+	char ingreso[TI];
 
-		i = 0;
-		while (palabra[i] != '\0' && palabra[i] != '\n') {
-			grilla[0][i] = palabra [i];
-		}
-		return 1;
-	} else {
-		printf("Veo que aun no estas listo para cargar ninguna palabra 'T'...\n");
-		return 0;
+	printf("Ingrese la fila: ");
+	read_line(ingreso, TI);
+	while (atoi(ingreso) > 10 || (( atoi(ingreso) < 1 && ingreso[0] != 't'
+		&& ingreso[0] != 'T') || ingreso[1] != '\0')) {
+		printf("Ingrese la fila (entre 1 y 10) ('T' para terminar): ");
+		read_line(ingreso, TI);
 	}
+	if ((ingreso[0] != 't') && (ingreso[0] != 'T')) {
+		fila = atoi(ingreso) - 1;
+		printf("Ingrese el numero de palabra: ");
+		read_line(ingreso, TI);
+		while (atoi(ingreso) > 2 || atoi(ingreso) < 1 && ((ingreso[0] != 't')
+			&& (ingreso[0] != 'T')) || ingreso[1] != '\0') {
+				printf("Ingrese el numero de palabra. (1 o 2) ('T' para terminar): ");
+				read_line(ingreso, TI);
+			}
+		if ((ingreso[0] != 't') && (ingreso[0] != 'T')) {
+			columna = atoi(ingreso) - 1;
+			//cantidad_de_letras = cantidad_de_letras(fila, columna);
+			cantidad_de_letras = 3;
+
+			printf("Ingrese la Palabra: ");
+			read_line(ingreso, TI);
+			while (strlen(ingreso) != cantidad_de_letras) {
+					printf("Ingrese la palabra. (%d letras): ", cantidad_de_letras);
+					read_line(ingreso, TI);
+				}
+			// Ingreso la palabra en el crucigrama.
+			for (i=0; i < cantidad_de_letras; i++) {
+				grilla[fila][i] = ingreso[i];
+			}
+		}
+	}
+
+	return i; // i es 0 exepto que se halla cargado una palabra.
 }
 
 void resultados() {
