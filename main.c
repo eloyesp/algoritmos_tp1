@@ -6,8 +6,7 @@
 #include <string.h>
 #include "palydef.h"
 
-/**
-  Variables globales:
+/**   Variables globales:
 */
 char sentido;             // sentido en el que se juega el crucigrama. Que puede ser H O V.
 char grilla[TG][TG];      // letras escritas en la grilla.
@@ -189,7 +188,7 @@ int cargar_palabra() {
 	printf("Ingrese la fila: ");
 	read_line(ingreso, TI);
 	while (atoi(ingreso) > 10 || (( atoi(ingreso) < 1 && ingreso[0] != 't'
-		&& ingreso[0] != 'T') || ingreso[1] != '\0')) {
+		&& ingreso[0] != 'T') && ingreso[1] != '\0')) {
 		printf("Ingrese la fila (entre 1 y 10) ('T' para terminar): ");
 		read_line(ingreso, TI);
 	}
@@ -210,7 +209,8 @@ int cargar_palabra() {
 			printf("Ingrese la Palabra: ");
 			read_line(ingreso, TI);
 			while (strlen(ingreso) != cantidad_de_letras) {
-					printf("Ingrese la palabra. (%d letras): ", cantidad_de_letras);
+					printf("Ingrese la palabra (%d:%d : %s )(%d letras): ", 
+						fila+1, columna+1, def[respuestas[fila][columna]], cantidad_de_letras);
 					read_line(ingreso, TI);
 				}
 			// Ingreso la palabra en el crucigrama.
