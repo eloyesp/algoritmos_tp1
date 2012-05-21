@@ -253,7 +253,7 @@ void elegir_palabras() {
 		for (j=0; j<2; j++) {
 			do {
 				aux = (de_tres_letras(i, j)) ? rand()%20 : rand()%30+20;
-			} while ( ya_esta(aux, i + 10*j) );
+			} while ( ya_esta(aux, 2*i + j) );
 
 			respuestas[i][j] = aux;
 		}
