@@ -9,131 +9,117 @@ void cargar_diccionario(void)
 	strcpy(pal[0], "oso");
 	strcpy(def[0], "Animal muy grande que te abraza.");
 
-	strcpy(pal[0], "une");
-	strcpy(def[0], "Junta, enlaza una cosa con otra.");
+	strcpy(pal[1], "une");
+	strcpy(def[1], "Junta, enlaza una cosa con otra.");
 
-	strcpy(pal[0], "ron");
-	strcpy(def[0], "Licor alcohólico de la melaza.");
+	strcpy(pal[2], "ron");
+	strcpy(def[2], "Licor alcohólico de la melaza.");
 
-	strcpy(pal[0], "log");
-	strcpy(def[0], "Logaritmo.");
+	strcpy(pal[3], "log");
+	strcpy(def[3], "Logaritmo.");
 
-	strcpy(pal[0], "tnt");
-	strcpy(def[0], "Explosivo poderoso.");
+	strcpy(pal[4], "tnt");
+	strcpy(def[4], "Explosivo poderoso.");
 
-	strcpy(pal[0], "aji");
-	strcpy(def[0], "Pimiento.");
+	strcpy(pal[5], "aji");
+	strcpy(def[5], "Pimiento.");
 
-	strcpy(pal[0], "ley");
-	strcpy(def[0], "Precepto dictado por la suprema autoridad.");
+	strcpy(pal[6], "ley");
+	strcpy(def[6], "Precepto dictado por la suprema autoridad.");
 
-	strcpy(pal[0], "feo");
-	strcpy(def[0], "Que carece de belleza.");
+	strcpy(pal[7], "feo");
+	strcpy(def[7], "Que carece de belleza.");
 
-	strcpy(pal[0], "uno");
-	strcpy(def[0], "Numero que le sigue al cero.");
+	strcpy(pal[8], "uno");
+	strcpy(def[8], "Numero que le sigue al cero.");
 
-	strcpy(pal[0], "sol");
-	strcpy(def[0], "Estrella luminosa cercana a la tierra.");
+	strcpy(pal[9], "sol");
+	strcpy(def[9], "Estrella luminosa cercana a la tierra.");
 
-	strcpy(pal[0], "ojo");
-	strcpy(def[0], "Organo de la vista OJO");
+	strcpy(pal[10], "ojo");
+	strcpy(def[10], "Organo de la vista OJO");
 
-	strcpy(pal[0], "ola");
-	strcpy(def[0], "Movimiento que hace el agua en el mar.");
+	strcpy(pal[11], "ola");
+	strcpy(def[11], "Movimiento que hace el agua en el mar.");
 
-	strcpy(pal[0], "sal");
-	strcpy(def[0], "Cloruro de sodio.");
+	strcpy(pal[12], "sal");
+	strcpy(def[12], "Cloruro de sodio.");
 
-	strcpy(pal[0], "rap");
-	strcpy(def[0], "Ritmo negro urbano.");
+	strcpy(pal[13], "rap");
+	strcpy(def[13], "Ritmo negro urbano.");
 
-	strcpy(pal[0], "uva");
-	strcpy(def[0], "Fruta pequeña y redonda.");
+	strcpy(pal[14], "uva");
+	strcpy(def[14], "Fruta pequeña y redonda.");
 
-	strcpy(pal[0], "oro");
-	strcpy(def[0], "Metal amarillo.");
+	strcpy(pal[15], "oro");
+	strcpy(def[15], "Metal amarillo.");
 
-	strcpy(pal[0], "oca");
-	strcpy(def[0], "El juego de la...");
+	strcpy(pal[16], "oca");
+	strcpy(def[16], "El juego de la...");
 
-	strcpy(pal[0], "via");
-	strcpy(def[0], "Por donde pasa el tren.");
+	strcpy(pal[17], "via");
+	strcpy(def[17], "Por donde pasa el tren.");
 
-	strcpy(pal[0], "cal");
-	strcpy(def[0], "CaO");
+	strcpy(pal[18], "cal");
+	strcpy(def[18], "CaO");
 
-	strcpy(pal[0], "pan");
-	strcpy(def[0], "Alimento (en general)");
-
-	strcpy(pal[0], "ARN");
-	strcpy(def[0], "Ácido ribonucleico");
-
-	strcpy(pal[0], "tes");
-	strcpy(def[0], "Rostro");
+	strcpy(pal[19], "pan");
+	strcpy(def[19], "Alimento (en general)");
 
 	strcpy(pal[20], "casa");
 	strcpy(def[20], "Habitat de un ser humano.");
 
-	strcpy(pal[20], "adios");
-	strcpy(def[20],"chau.");
+	strcpy(pal[21], "chau");
+	strcpy(def[21],"Adios.");
 
-	strcpy(pal[20],"soda");
-	strcpy(def[20],"Agua con gas.");
+	strcpy(pal[22],"soda");
+	strcpy(def[22],"Agua con gas.");
 
-	strcpy(pal[20],"sopa");
-	strcpy(def[20],"Alimento liquido.");
+	strcpy(pal[23],"sopa");
+	strcpy(def[23],"Alimento liquido.");
 
-	strcpy(pal[20],"joya");
-	strcpy(def[20],"Alahja.");
+	strcpy(pal[24],"joya");
+	strcpy(def[24],"Alahja.");
 
-	strcpy(pal[20],"gota");
-	strcpy(def[20],"Cantidad muy pequeña de liquido.");
+	strcpy(pal[25],"gota");
+	strcpy(def[25],"Cantidad muy pequeña de liquido.");
 
+	strcpy(pal[26],"pena");
+	strcpy(def[26],"Castigo.");
 
-	strcpy(pal[20],"pena");
-	strcpy(def[20],"Castigo.");
-
-
-	strcpy(pal[20],"chip");
-	strcpy(def[20],"Circuito integrado electronico.");
+	strcpy(pal[27],"chip");
+	strcpy(def[27],"Circuito integrado electronico.");
 
 
-	strcpy(pal[20],"lila");
-	strcpy(def[20],"Violeta claro.");
+	strcpy(pal[28],"lila");
+	strcpy(def[28],"Violeta claro.");
 
+	strcpy(pal[29],"tour");
+	strcpy(def[29],"Excursion turistica.");
 
-	strcpy(pal[20],"tour");
-	strcpy(def[20],"Excursion turistica.");
+	strcpy(pal[30], "alfa");
+	strcpy(def[30],"letra griega a.");
 
+	strcpy(pal[31],"zeus");
+	strcpy(def[31],"Dios del olimpo.");
 
-	strcpy(pal[20], "alfa");
-	strcpy(def[20],"letra griega a.");
+	strcpy(pal[32],"auto");
+	strcpy(def[32],"Medio de transporte familiar.");
 
+	strcpy(pal[33],"Arpa");
+	strcpy(def[33],"Instrumento musical de cuerdas.");
 
-	strcpy(pal[20],"zeus");
-	strcpy(def[20],"Dios del olimpo.");
+	strcpy(pal[34],"tuba");
+	strcpy(def[34],"Instrumento mucical de viento.");
 
+	strcpy(pal[35],"papa");
+	strcpy(def[35],"Tuberculo.");
 
-	strcpy(pal[20],"auto");
-	strcpy(def[20],"Medio de transporte familiar.");
+	strcpy(pal[36],"coco");
+	strcpy(def[36],"Fruta de palmera.");
 
-	strcpy(pal[20],"Arpa");
-	strcpy(def[20],"Instrumento musical de cuerdas.");
-
-
-	strcpy(pal[20],"tuba");
-	strcpy(def[20],"Instrumento mucical de viento.");
-
-
-	strcpy(pal[20],"papa");
-	strcpy(def[20],"Tuberculo.");
-
-	strcpy(pal[20],"coco");
-	strcpy(def[20],"Fruta de palmera.");
-
-	strcpy(pal[20],"rata");
-	strcpy(def[20],"Mamifero roedor pequeño.");
+	strcpy(pal[37],"rata");
+	strcpy(def[37],"Mamifero roedor pequeño.");
 
 	strcpy(pal[20],"cana");
 	strcpy(def[20],"Pelo blanco.");
