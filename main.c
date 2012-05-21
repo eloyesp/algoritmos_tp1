@@ -145,10 +145,7 @@ char guion_asterisco(const int i, const int j) {
 	else if (j > 3 && j < 6)
 		value = '*';
 	else {
-		if ((i % 2) == 0)
-			value = '-';
-		else
-			value = '*';
+		value = (de_tres_letras(i, 0)) ? '*' : '-';
 	}
 	return value;
 }
