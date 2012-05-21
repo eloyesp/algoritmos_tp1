@@ -242,7 +242,12 @@ int de_tres_letras(const int i, const int j) {
 void resultados() {
 	/** Indica al usuario el puntaje obtenido, asi como sus aciertos y errores.
 	*/
+	int puntaje=0;
+	// recorrer filas e indicar errores.
+	// Dar mensaje de felicitaciones si no hay errores.
+	// Puntaje
 	printf("Muy bien...\n");
+	system("pause");
 }
 
 void elegir_palabras() {
