@@ -172,7 +172,7 @@ void mostrar_grilla() {
 	//Mostramos las definiciones de la grilla.
 	for (i=0;i<TG;i++) {
 		for(j=0; j<2; j++) {
-			printf("Fila %d - Pal %d: %s | ", i+1, j+1, def[respuestas[i][j]]);
+			printf("Fila %d - %d: %s | ", i+1, j+1, def[respuestas[i][j]]);
 		}
 	}
 	printf("\n");
