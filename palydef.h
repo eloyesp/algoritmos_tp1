@@ -49,7 +49,7 @@ void cargar_diccionario(void)
 	strcpy(def[13], "Ritmo negro urbano.");
 
 	strcpy(pal[14], "uva");
-	strcpy(def[14], "Fruta pequeña y redonda.");
+	strcpy(def[14], "Fruta pequenia y redonda.");
 
 	strcpy(pal[15], "oro");
 	strcpy(def[15], "Metal amarillo.");
@@ -82,14 +82,13 @@ void cargar_diccionario(void)
 	strcpy(def[24],"Alahja.");
 
 	strcpy(pal[25],"gota");
-	strcpy(def[25],"Cantidad muy pequeña de liquido.");
+	strcpy(def[25],"Cantidad muy pequenia de liquido.");
 
 	strcpy(pal[26],"pena");
 	strcpy(def[26],"Castigo.");
 
 	strcpy(pal[27],"chip");
 	strcpy(def[27],"Circuito integrado electronico.");
-
 
 	strcpy(pal[28],"lila");
 	strcpy(def[28],"Violeta claro.");
@@ -119,7 +118,7 @@ void cargar_diccionario(void)
 	strcpy(def[36],"Fruta de palmera.");
 
 	strcpy(pal[37],"rata");
-	strcpy(def[37],"Mamifero roedor pequeño.");
+	strcpy(def[37],"Mamifero roedor pequenio.");
 
 	strcpy(pal[38],"cana");
 	strcpy(def[38],"Pelo blanco.");
