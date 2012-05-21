@@ -121,41 +121,40 @@ void cargar_diccionario(void)
 	strcpy(pal[37],"rata");
 	strcpy(def[37],"Mamifero roedor pequeño.");
 
-	strcpy(pal[20],"cana");
-	strcpy(def[20],"Pelo blanco.");
+	strcpy(pal[38],"cana");
+	strcpy(def[38],"Pelo blanco.");
 
-	strcpy(pal[20],"nono");
-	strcpy(def[20],"Dos veces no.");
+	strcpy(pal[39],"nono");
+	strcpy(def[39],"Dos veces no.");
 
-	strcpy(pal[20],"ogro");
-	strcpy(def[20],"criatura verde animada que es mala");
+	strcpy(pal[40],"ogro");
+	strcpy(def[40],"criatura verde animada que es mala");
 
-	strcpy(pal[20],"jefe");
-	strcpy(def[20],"Persona que tiene poder o autoridad sobre un grupo para dirigir su trabajo.");
+	strcpy(pal[41],"jefe");
+	strcpy(def[41],"Persona que tiene poder o autoridad sobre un grupo para dirigir su trabajo.");
 
-	strcpy(pal[20],"gato");
-	strcpy(def[20],"Animal felino.");
+	strcpy(pal[42],"gato");
+	strcpy(def[42],"Animal felino.");
 
-	strcpy(pal[20],"cama");
-	strcpy(def[20],"Lugar de descanso.");
+	strcpy(pal[43],"cama");
+	strcpy(def[43],"Lugar de descanso.");
 
-	strcpy(pal[20],"boca");
-	strcpy(def[20],"Orificio donde entra la comida.");
+	strcpy(pal[44],"boca");
+	strcpy(def[44],"Orificio donde entra la comida.");
 
-	strcpy(pal[20],"loco");
-	strcpy(def[20],"Persona fuera de si.");
+	strcpy(pal[45],"loco");
+	strcpy(def[45],"Persona fuera de si.");
 
-	strcpy(pal[20],"ropa");
-	strcpy(def[20],"Cualquier prenda de tela que sirve para vestir.");
+	strcpy(pal[46],"ropa");
+	strcpy(def[46],"Cualquier prenda de tela que sirve para vestir.");
 
-	strcpy(pal[20],"foco");
-	strcpy(def[20],"Lampara que emite luz.");
+	strcpy(pal[47],"foco");
+	strcpy(def[47],"Lampara que emite luz.");
 
-	strcpy(pal[20],"mayo");
-	strcpy(def[20],"Quinto mes del año.");
+	strcpy(pal[48],"mayo");
+	strcpy(def[48],"Quinto mes del anio.");
 
-	strcpy(pal[20],"taza");
-	strcpy(def[20],"Vasija pequeña para tomar liquidos.");
-
+	strcpy(pal[49],"taza");
+	strcpy(def[49],"Vasija pequenia para tomar liquidos.");
 }
 
