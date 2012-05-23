@@ -25,6 +25,7 @@ char guion_asterisco(const int i, const int j);
 int cargar_palabra(void);
 int de_tres_letras(const int fila, const int columna);
 void resultados(void);
+int asignar_puntaje(const int fila, const int palabra);
 void elegir_palabras(void);
 char * read_line (char * buf, size_t length);
 int ya_esta(const int valor, const int index);
@@ -169,7 +170,7 @@ void mostrar_grilla() {
 	//Mostramos las definiciones de la grilla.
 	for (i=0;i<TG;i++) {
 		for(j=0; j<2; j++) {
-			printf("Fila %d - %d: %s | ", i+1, j+1, def[respuestas[i][j]]);
+			printf("Fila %d - %d: %s \n", i+1, j+1, def[respuestas[i][j]]);
 		}
 	}
 	printf("\n");
@@ -239,12 +240,38 @@ int de_tres_letras(const int i, const int j) {
 void resultados() {
 	/** Indica al usuario el puntaje obtenido, asi como sus aciertos y errores.
 	*/
-	int puntaje=0;
+	int puntaje[TG][2], j, i;
 	// recorrer filas e indicar errores.
+	//resultados
+	for(j=0;j<2;j++){
+		for(i=0;i<TG;i++){
+			puntaje[i][j] = asignar_puntaje(i,j);
+			printf("puntaje: %2i\n",  puntaje[i][j]);
+		}
+	}
 	// Dar mensaje de felicitaciones si no hay errores.
 	// Puntaje
 	printf("Muy bien...\n");
 	system("pause");
+}
+
+int asignar_puntaje(const int fila, const int palabra)
+	/** 
+	*/
+{
+	int d, j=0, correcta = 0, cantidad_de_letras;
+	d = palabra * 6;
+	cantidad_de_letras = de_tres_letras(fila, palabra) ? 3 : 4;
+	
+	while ( j<cantidad_de_letras && correcta == 0) {
+		if (grilla[fila][j+d] == '-')
+			correcta = 1;
+		else if (grilla[fila][j+d] != pal[respuestas[fila][palabra]][j])
+			correcta = 2;
+		j++;
+	}
+	
+	return correcta;
 }
 
 void elegir_palabras() {
