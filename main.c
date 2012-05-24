@@ -178,19 +178,23 @@ void mostrar_grilla() {
 	/** Muestra al usuario la grilla (en su estado actual) y las definiciones.
 	*/
 	int i,j;
+	char fila_columna[8];
 	system("cls");
 	if (sentido == 'H') {
+		strcpy(fila_columna, "Fila");
 		printf("----****----****----**** Crucigrama Horizontal ****----****----****----\n\n\n");
 		mostrar_grilla_horizontal();
 	} else {
+		strcpy(fila_columna, "Columna");
 		printf("----****----****----****  Crucigrama Vertical  ****----****----****----\n\n\n");
 		mostrar_grilla_vertical();
 	}
-	printf("\nDefiniciones:\n");
+	
+	printf("\n\nDefiniciones:\n");
 	//Mostramos las definiciones de la grilla.
 	for (i=0;i<TG;i++) {
 		for(j=0; j<2; j++) {
-			printf("Fila %d - %d: %s \n", i+1, j+1, def[respuestas[i][j]]);
+			printf("%s %d - %d: %s \n", fila_columna, i+1, j+1, def[respuestas[i][j]]);
 		}
 	}
 	printf("\n");
@@ -198,9 +202,9 @@ void mostrar_grilla() {
 
 void mostrar_grilla_vertical() {
 	int i, j;
+	printf("                         1  2  3  4  5  6  7  8  9  10\n");
 	for (i=0;i<TG;i++) {
-		printf("                    %2d)", i+1);
-		
+		printf("                        ", i+1);
 		for (j=0; j<TG; j++) {
 			printf(" %c ", grilla[j][i]);
 		}
@@ -210,6 +214,7 @@ void mostrar_grilla_vertical() {
 
 void mostrar_grilla_horizontal(void) {
 	int i, j;
+	
 	for (i=0;i<TG;i++) {
 		printf("                    %2d)", i+1);
 		for (j=0; j<TG; j++) {
