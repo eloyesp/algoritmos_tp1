@@ -34,7 +34,8 @@ void jugar(void);
 void despedida(void);
 void vaciar_grilla(void);
 void mostrar_grilla(void);
-void mostrar_grilla_vertical(void) ;
+void mostrar_grilla_vertical(void);
+void mostrar_grilla_horizontal(void);
 char guion_asterisco(const int i, const int j);
 int cargar_palabra(void);
 int de_tres_letras(const int fila, const int columna);
@@ -91,7 +92,7 @@ int menu() {
 	opcion = atoi(entrada);
 
 	while(opcion!=1 && opcion!=2){
-		printf("Ingreso una opcion incorrecta.\nIngrese nuevamente la opcion que desea:\n");
+		printf("\nIngreso una opcion incorrecta.\nIngrese nuevamente la opcion que desea: ");
 		read_line(entrada, 3);
 		opcion = atoi(entrada);
 	}
@@ -178,15 +179,12 @@ void mostrar_grilla() {
 	*/
 	int i,j;
 	system("cls");
-	printf("----****----****----**** Crucigrama Horizontal ****----****----****----\n");
-	printf("\n\n");
-
-	for (i=0;i<TG;i++) {
-		printf("                    %2d)", i+1);
-		for (j=0; j<TG; j++) {
-			printf(" %c ", grilla[i][j]);
-		}
-		printf("\n");
+	if (sentido == 'H') {
+		printf("----****----****----**** Crucigrama Horizontal ****----****----****----\n\n\n");
+		mostrar_grilla_horizontal();
+	} else {
+		printf("----****----****----****  Crucigrama Vertical  ****----****----****----\n\n\n");
+		mostrar_grilla_vertical();
 	}
 	printf("\nDefiniciones:\n");
 	//Mostramos las definiciones de la grilla.
@@ -197,14 +195,9 @@ void mostrar_grilla() {
 	}
 	printf("\n");
 }
+
 void mostrar_grilla_vertical() {
-	/** Muestra al usuario la grilla (en su estado actual) y las definiciones.
-	*/
-	int i,j;
-	system("cls");
-	printf("----****----****----**** Crucigrama Vertical ****----****----****----\n");
-	printf("\n\n");
-	
+	int i, j;
 	for (i=0;i<TG;i++) {
 		printf("                    %2d)", i+1);
 		
@@ -213,14 +206,17 @@ void mostrar_grilla_vertical() {
 		}
 		printf("\n");
 	}
-	printf("\nDefiniciones:\n");
-	//Mostramos las definiciones de la grilla.
+}
+
+void mostrar_grilla_horizontal(void) {
+	int i, j;
 	for (i=0;i<TG;i++) {
-		for(j=0; j<2; j++) {
-			printf("Fila %d - %d: %s \n", i+1, j+1, def[respuestas[i][j]]);
+		printf("                    %2d)", i+1);
+		for (j=0; j<TG; j++) {
+			printf(" %c ", grilla[i][j]);
 		}
+		printf("\n");
 	}
-	printf("\n");
 }
 
 int cargar_palabra() {
