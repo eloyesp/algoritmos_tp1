@@ -310,64 +310,50 @@ int de_tres_letras(const int i, const int j) {
 void resultados() {
 	/** Indica al usuario el puntaje obtenido, asi como sus aciertos y errores.
 	*/
-	int puntaje[TG][2], j, i,totalpuntos = 0;
+	int i, j, totalpuntos = 0;
 	// recorrer filas e indicar errores.
-	//resultados
-	for(j = 0; j < 2; j++){
-		for(i=0;i<TG;i++){
-			puntaje[i][j] = asignar_puntaje(i,j);
-			totalpuntos=asignar_puntaje(i,j)+totalpuntos;
+	for (i=0;i<TG;i++) {
+		for (j=0; j<2; j++) {
+			totalpuntos += asignar_puntaje(i, j);
 		}
 	}	
-	printf("puntaje: %d\n",  totalpuntos);
-	if(puntaje[i][j] == 75){
+
+	// Dar mensaje de felicitaciones si no hay errores.
+	if(totalpuntos == 75){
 		printf("\n\n\n\n");
 		printf(".+.+.+..+.+.+.+.+.+.+.+.+++.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+++");
-	printf("                 FELICITACION: CRUCIGRAMA CORRECTO");
-	printf(".+.+.+..+.+.+.+.+.+.+.+.+++.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+++");
+		printf("                 FELICITACION: CRUCIGRAMA CORRECTO");
+		printf(".+.+.+..+.+.+.+.+.+.+.+.+++.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+++");
 	}
-	// Dar mensaje de felicitaciones si no hay errores.
+	
 	// Puntaje
+	printf("puntaje: %d de 75 (%.2f %%)\n",  totalpuntos, (float) totalpuntos / 75 * 100 );
 	system("pause");
 }
 
 int asignar_puntaje(const int fila, const int palabra){
-	int d, j=0, correcta = 0, cantidad_de_letras,puntos;
+	int d, j=0, correcta = 0, cantidad_de_letras, puntos;
 	d = palabra * 6;
 	cantidad_de_letras = de_tres_letras(fila, palabra) ? 3 : 4;
 	
 	while ( j<cantidad_de_letras && correcta == 0) {
 		if (grilla[fila][j+d] == '-')
 			correcta = 1;
-			
 		else if (grilla[fila][j+d] != pal[respuestas[fila][palabra]][j])
 			correcta = 2;
 		j++;
 	}
 	
-	if(correcta == 0)
-		puntos=cantidad_de_letras;
-	
-	else if(correcta==1){
+	if (correcta == 0)
+		puntos = cantidad_de_letras;
+	else if (correcta==1) {
 		puntos = 0;
-		if(d == 0){
-	printf("la palabra 1 de la fila %d esta vacia.\n",fila+1);
-		}
-		else{
-		printf("la palabra 2 de la fila %d esta vacia.\n",fila+1);
-		}
-	}
-	
-	else{
-		if(d==0){
+		printf("La palabra %d de la fila %d esta vacia.\n", palabra+1, fila+1);
+	} else {
 		puntos=0;
-		printf("la palabra 1 de la fila %d esta incorrecta.\n",fila+1);
-		}
-		else{
-			printf("la palabra 2 de la fila %d esta incorrecta.\n",fila+1);
-		}
-		
+		printf("La palabra %d de la fila %d esta incorrecta.\n", palabra+1, fila+1);
 	}
+
 	return puntos;
 }
 
