@@ -21,7 +21,7 @@ Roberto Cavalcabué			eltotti_38@hotmail.com
 
 /**   Variables globales:
 */
-int sentido;             // sentido en el que se juega el crucigrama. Que puede ser H O V.
+char sentido;             // sentido en el que se juega el crucigrama. Que puede ser H O V.
 char grilla[TG][TG];      // letras escritas en la grilla.
 int respuestas[TG][2];    // listado de palabras elegidas al azar.
 
@@ -32,14 +32,13 @@ void bienvenida(void);
 int menu(); // retorna falso si el usuario elige terminar ('t' o 'T')
 void jugar(void);
 void despedida(void);
-void vaciar_grilla(const int sentido);
+void vaciar_grilla(void);
 void mostrar_grilla(void);
 void mostrar_grilla_vertical(void) ;
-char guion_asterisco(const int i, const int j,const int sentido);
+char guion_asterisco(const int i, const int j);
 int cargar_palabra(void);
 int de_tres_letras(const int fila, const int columna);
 void resultados(void);
-
 int asignar_puntaje(const int fila, const int palabra);
 void elegir_palabras(void);
 char * read_line (char * buf, size_t length);
@@ -103,33 +102,33 @@ int menu() {
 		return 0;
 }
 
-void jugar() {
+void jugar()
+{
 	/** Inicializa las variables del juego y permite cargar las palabras
 	*/
+	char entrada[3];
+	int opcion;
 	printf("                          1) Horizontal.\n\n");
 	printf("                          2) Vertical.\n\n");
-	printf("                      Ingrese una opcion valida: ");
-	scanf("%d",&sentido);
-	fflush (stdin);
-	while(sentido!=1 && sentido!=2){
-		printf("\n\nElegir entre 'H' = Horizontal o 'V' = Vertical:");
-		scanf("%d",&sentido);
-		fflush (stdin);
-	}
-		printf("%s\n",pal[0]);
-		printf("%s\n",pal[20]);
-	
-	
-	vaciar_grilla(sentido);
-	elegir_palabras();
-if(sentido==1){
-	mostrar_grilla();
-}
-else
-	mostrar_grilla_vertical();
 
+	printf("                      Ingrese una opcion valida: ");
+	read_line(entrada, 3);
+	opcion = atoi(entrada);
+	while(opcion!=1 && opcion!=2){
+		printf("Ingreso una opcion incorrecta.\nIngrese nuevamente la opcion que desea: ");
+		read_line(entrada, 3);
+		opcion = atoi(entrada);
+	}
+	if (opcion == 1)
+		sentido = 'H';
+	else
+		sentido = 'V';
+	
+	vaciar_grilla();
+	elegir_palabras();
+	
+	mostrar_grilla();
 	while(cargar_palabra()) {
-		
 		mostrar_grilla();
 	}
 	resultados();
@@ -150,13 +149,13 @@ void despedida() {
 	}
 }
 
-void vaciar_grilla(const int sentido) {
+void vaciar_grilla() {
 	/** Llena la grilla de - o * segun corresponda.*/
 	int i, j;
 	if(sentido==1){
 		for (i=0; i<TG; i++) {
 			for (j=0; j<TG; j++) {
-			grilla[i][j] = guion_asterisco(i, j,sentido);
+			grilla[i][j] = guion_asterisco(i, j);
 		}
 	}
 	}
@@ -164,13 +163,13 @@ void vaciar_grilla(const int sentido) {
 		for (j=0; j<TG; j++)
 			for(i=0; i<TG; i++) {
 			 {
-				grilla[i][j] = guion_asterisco(i, j,sentido);
+				grilla[i][j] = guion_asterisco(i, j);
 			}
 	
 		}
 	}
 }
-char guion_asterisco(const int i, const int j,const int sentido) {
+char guion_asterisco(const int i, const int j) {
 	/** retorna - o * segun corresponda a la fila y columna.
 	*/
 	char value;
