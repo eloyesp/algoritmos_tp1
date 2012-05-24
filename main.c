@@ -276,7 +276,7 @@ int palabra_valida(const char input[]) {
 	int i=0, valida = 1;
 	char c;
 	c = input[i];
-	while (valida == 1 && c != '\n') {
+	while (valida == 1 && c != '\0') {
 		if (c >= 48 && c <= 57) {
 			valida = 0;
 			printf("La palabra no puede contener numeros\n");
