@@ -163,30 +163,14 @@ char guion_asterisco(const int i, const int j) {
 	/** retorna - o * segun corresponda a la fila y columna.
 	*/
 	char value;
-	if(sentido==1){
-		if (j < 3 || j > 5)
-			value = '-';
-		else if (j > 3 && j < 6)
-			value = '*';
-		else {
-			if ((i % 2) == 0)
-				value = '-';
-			else
-				value = '*';
-		}
-		return value;
+	if (j < 3 || j > 5)
+		value = '-';
+	else if (j > 3 && j < 6)
+		value = '*';
+	else {
+		value = (de_tres_letras(i, 0)) ? '*' : '-';
 	}
-	
-	else{
-		if (j > 3 && j < 6)
-			value = '-';
-			else if (i < 3 || i > 5)
-			value = '*';
-			else {
-				value = (de_tres_letras(j, 0)) ? '*' : '-';
-			}
 	return value;
-	}
 }
 
 void mostrar_grilla() {
