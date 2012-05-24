@@ -281,11 +281,10 @@ int de_tres_letras(const int i, const int j) {
 	    Es 3.
 	*/
 	int es_tres;
-	//if(sentido==1)
 	if (j != 0) {
 		es_tres = 0;
 	} else {
-		if ((i % 2) == 0)
+		if ((sentido == 'H' && (i % 2) == 0) || (sentido == 'V' && (i % 2) == 1))
 			es_tres = 0;
 		else
 			es_tres = 1;
