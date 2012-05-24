@@ -25,7 +25,7 @@ void cargar_diccionario(void)
 	strcpy(def[5], "Pimiento.");
 
 	strcpy(pal[6], "ley");
-	strcpy(def[6], "Precepto dictado por la suprema autoridad.");
+	strcpy(def[6], "Precepto dictado por la sup. autoridad.");
 
 	strcpy(pal[7], "feo");
 	strcpy(def[7], "Que carece de belleza.");
@@ -37,7 +37,7 @@ void cargar_diccionario(void)
 	strcpy(def[9], "Estrella luminosa cercana a la tierra.");
 
 	strcpy(pal[10], "ojo");
-	strcpy(def[10], "Organo de la vista OJO");
+	strcpy(def[10], "Organo de la vista");
 
 	strcpy(pal[11], "ola");
 	strcpy(def[11], "Movimiento que hace el agua en el mar.");
@@ -130,7 +130,7 @@ void cargar_diccionario(void)
 	strcpy(def[40],"criatura verde animada que es mala");
 
 	strcpy(pal[41],"jefe");
-	strcpy(def[41],"Persona que tiene poder o autoridad sobre un grupo para dirigir su trabajo.");
+	strcpy(def[41],"Conductor de un grupo.");
 
 	strcpy(pal[42],"gato");
 	strcpy(def[42],"Animal felino.");
@@ -145,7 +145,7 @@ void cargar_diccionario(void)
 	strcpy(def[45],"Persona fuera de si.");
 
 	strcpy(pal[46],"ropa");
-	strcpy(def[46],"Cualquier prenda de tela que sirve para vestir.");
+	strcpy(def[46],"Cualquier prenda de tela.");
 
 	strcpy(pal[47],"foco");
 	strcpy(def[47],"Lampara que emite luz.");
