@@ -39,6 +39,7 @@ void mostrar_grilla_vertical(void);
 void mostrar_grilla_horizontal(void);
 char guion_asterisco(const int i, const int j);
 int cargar_palabra(void);
+int palabra_valida(const char input[]);
 int de_tres_letras(const int fila, const int columna);
 void resultados(void);
 int asignar_puntaje(const int fila, const int palabra);
@@ -151,7 +152,7 @@ void despedida() {
 	}
 }
 
-void vaciar_grilla() {
+void vaciar_grilla(void) {
 	/** Llena la grilla de - o * segun corresponda.*/
 	int i, j;
 	for (i=0; i<TG; i++) {
@@ -175,7 +176,7 @@ char guion_asterisco(const int i, const int j) {
 	return value;
 }
 
-void mostrar_grilla() {
+void mostrar_grilla(void) {
 	/** Muestra al usuario la grilla (en su estado actual) y las definiciones.
 	*/
 	int i,j;
@@ -201,7 +202,7 @@ void mostrar_grilla() {
 	printf("\n");
 }
 
-void mostrar_grilla_vertical() {
+void mostrar_grilla_vertical(void) {
 	int i, j;
 	printf("                         1  2  3  4  5  6  7  8  9  10\n");
 	for (i=0;i<TG;i++) {
@@ -256,17 +257,11 @@ int cargar_palabra() {
 
 			printf("Ingrese la Palabra: ");
 			read_line(ingreso, TI);
-			while (strlen(ingreso) != cantidad_de_letras) {
+			while (strlen(ingreso) != cantidad_de_letras || !palabra_valida(ingreso)) {
 					printf("Ingrese la palabra (%d:%d : %s )(%d letras): ", 
 						fila+1, columna+1, def[respuestas[fila][columna]], cantidad_de_letras);
 					read_line(ingreso, TI);
 				}
-			for(i=0;i<TI;i++){
-				while((ingreso[i]>=48)&&(ingreso[i]<=57)){
-					printf("\nNo se puede ingresar numero, vuelva a ingresar:\n");
-					read_line(ingreso,TI);
-				}
-			}
 			// Ingreso la palabra en el crucigrama.
 			for (i=0; i < cantidad_de_letras; i++) {
 				grilla[fila][i+d] = ingreso[i];
@@ -275,6 +270,25 @@ int cargar_palabra() {
 	}
 
 	return i; // i es 0 exepto que se halla cargado una palabra.
+}
+
+int palabra_valida(const char input[]) {
+	int i=0, valida = 1;
+	char c;
+	c = input[i];
+	while (valida == 1 && c != '\n') {
+		if (c >= 48 && c <= 57) {
+			valida = 0;
+			printf("La palabra no puede contener numeros\n");
+		}
+		if (c == '-' || c == '*') {
+			valida = 0;
+			printf("La palabra no puede contener ni guion(-) ni asteriscos(*)\n");
+		}
+		i++;
+		c = input[i];
+	}
+	return valida;
 }
 
 int de_tres_letras(const int i, const int j) {
