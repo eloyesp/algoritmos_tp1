@@ -13,7 +13,7 @@ void cargar_diccionario(void)
 	strcpy(def[1], "Junta, enlaza una cosa con otra.");
 
 	strcpy(pal[2], "ron");
-	strcpy(def[2], "Licor alcohólico de la melaza.");
+	strcpy(def[2], "Licor alcoholico de la melaza.");
 
 	strcpy(pal[3], "log");
 	strcpy(def[3], "Logaritmo.");
