@@ -152,23 +152,13 @@ void despedida() {
 void vaciar_grilla() {
 	/** Llena la grilla de - o * segun corresponda.*/
 	int i, j;
-	if(sentido==1){
-		for (i=0; i<TG; i++) {
-			for (j=0; j<TG; j++) {
+	for (i=0; i<TG; i++) {
+		for (j=0; j<TG; j++) {
 			grilla[i][j] = guion_asterisco(i, j);
 		}
 	}
-	}
-	else{
-		for (j=0; j<TG; j++)
-			for(i=0; i<TG; i++) {
-			 {
-				grilla[i][j] = guion_asterisco(i, j);
-			}
-	
-		}
-	}
 }
+
 char guion_asterisco(const int i, const int j) {
 	/** retorna - o * segun corresponda a la fila y columna.
 	*/
