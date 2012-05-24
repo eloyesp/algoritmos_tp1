@@ -1,14 +1,27 @@
+/*							Trabajo Practico Nº1
+
+							Grupo nº1
+
+-------------------------------------------------------------------------------
+Integrantes 				Direccion de correo 	
+-------------------------------------------------------------------------------
+Eloy Espinaco				eloyesp@gmail.com
+Daiana Giorgi				daia_gior@hotmail.com
+Roberto Cavalcabué			eltotti_38@hotmail.com
+*/
+
 // Tamanio de la grilla
 #define TG 10 // tamanio de la grilla
 #define SP 6  // inicio de la segunda palabra
 #include <stdio.h>
+#include <time.h>
 #include <stdlib.h>
 #include <string.h>
 #include "palydef.h"
 
 /**   Variables globales:
 */
-char sentido;             // sentido en el que se juega el crucigrama. Que puede ser H O V.
+int sentido;             // sentido en el que se juega el crucigrama. Que puede ser H O V.
 char grilla[TG][TG];      // letras escritas en la grilla.
 int respuestas[TG][2];    // listado de palabras elegidas al azar.
 
@@ -19,12 +32,14 @@ void bienvenida(void);
 int menu(); // retorna falso si el usuario elige terminar ('t' o 'T')
 void jugar(void);
 void despedida(void);
-void vaciar_grilla(void);
+void vaciar_grilla(const int sentido);
 void mostrar_grilla(void);
-char guion_asterisco(const int i, const int j);
+void mostrar_grilla_vertical(void) ;
+char guion_asterisco(const int i, const int j,const int sentido);
 int cargar_palabra(void);
 int de_tres_letras(const int fila, const int columna);
 void resultados(void);
+
 int asignar_puntaje(const int fila, const int palabra);
 void elegir_palabras(void);
 char * read_line (char * buf, size_t length);
@@ -48,15 +63,13 @@ void bienvenida() {
 	system("cls");
 
 	for (i=0;i<80*2;i++){
-		printf("#");
+		printf(".*.");
 	}
 
-	printf("\n\nBievenido a el crucigrama horizontal y vertical,"
-		"\n          un crucigrama con 2 grandes opciones..."
-		"\n          horizontal y vertical ! XD\n\n");
+	printf("\n\n  		Bienvenidos a la Aplicacion Crucigrama!!\n\n");
 
 	for (i=0;i<80*2;i++){
-		printf("#");
+		printf(".*.");
 	}
 	system("pause");
 }
@@ -74,7 +87,7 @@ int menu() {
 	printf("                          Menu principal\n");
 	printf("                          1) Jugar.\n\n");
 	printf("                          2) Salir.\n\n");
-	printf("                      Ingrese una opcion valida:\n\n");
+	printf("                      Ingrese una opcion valida: ");
 	read_line(entrada, 3);
 	opcion = atoi(entrada);
 
@@ -93,17 +106,30 @@ int menu() {
 void jugar() {
 	/** Inicializa las variables del juego y permite cargar las palabras
 	*/
-	printf("Un juego\n");
-	printf("%s\n",pal[0]);
-	printf("%s\n",pal[20]);
-	printf("Elegiste Horizontal, muy bien\n");
-	sentido='H';
-	vaciar_grilla();
+	printf("                          1) Horizontal.\n\n");
+	printf("                          2) Vertical.\n\n");
+	printf("                      Ingrese una opcion valida: ");
+	scanf("%d",&sentido);
+	fflush (stdin);
+	while(sentido!=1 && sentido!=2){
+		printf("\n\nElegir entre 'H' = Horizontal o 'V' = Vertical:");
+		scanf("%d",&sentido);
+		fflush (stdin);
+	}
+		printf("%s\n",pal[0]);
+		printf("%s\n",pal[20]);
+	
+	
+	vaciar_grilla(sentido);
 	elegir_palabras();
-
+if(sentido==1){
 	mostrar_grilla();
+}
+else
+	mostrar_grilla_vertical();
 
-	while (cargar_palabra()) {
+	while(cargar_palabra()) {
+		
 		mostrar_grilla();
 	}
 	resultados();
@@ -114,41 +140,64 @@ void despedida() {
 	system("cls");
 
 	for (i=0;i<80*2;i++){
-		printf("#");
+		printf(".*.");
 	}
 
-	printf("\n\nMUCHAS GRACIAS POR JUGAR..."
-		"\n          RECUERDE QUE EN ESTE JUEGO GANA EL MAS PERSISTENTE"
-		"\n          PERSISTE Y VENCERAS...! XD\n\n");
+	printf("\n\n 				GAME OVER\n\n");
 
 	for (i=0;i<80*2;i++){
-		printf("#");
+		printf(".*.");
 	}
 }
 
-void vaciar_grilla() {
-	/** Llena la grilla de - o * segun corresponda.
-	*/
+void vaciar_grilla(const int sentido) {
+	/** Llena la grilla de - o * segun corresponda.*/
 	int i, j;
-	for (i=0; i<TG; i++) {
-		for (j=0; j<TG; j++) {
-			grilla[i][j] = guion_asterisco(i, j);
+	if(sentido==1){
+		for (i=0; i<TG; i++) {
+			for (j=0; j<TG; j++) {
+			grilla[i][j] = guion_asterisco(i, j,sentido);
+		}
+	}
+	}
+	else{
+		for (j=0; j<TG; j++)
+			for(i=0; i<TG; i++) {
+			 {
+				grilla[i][j] = guion_asterisco(i, j,sentido);
+			}
+	
 		}
 	}
 }
-
-char guion_asterisco(const int i, const int j) {
+char guion_asterisco(const int i, const int j,const int sentido) {
 	/** retorna - o * segun corresponda a la fila y columna.
 	*/
 	char value;
-	if (j < 3 || j > 5)
-		value = '-';
-	else if (j > 3 && j < 6)
-		value = '*';
-	else {
-		value = (de_tres_letras(i, 0)) ? '*' : '-';
+	if(sentido==1){
+		if (j < 3 || j > 5)
+			value = '-';
+		else if (j > 3 && j < 6)
+			value = '*';
+		else {
+			if ((i % 2) == 0)
+				value = '-';
+			else
+				value = '*';
+		}
+		return value;
 	}
+	
+	else{
+		if (j > 3 && j < 6)
+			value = '-';
+			else if (i < 3 || i > 5)
+			value = '*';
+			else {
+				value = (de_tres_letras(j, 0)) ? '*' : '-';
+			}
 	return value;
+	}
 }
 
 void mostrar_grilla() {
@@ -163,6 +212,31 @@ void mostrar_grilla() {
 		printf("                    %2d)", i+1);
 		for (j=0; j<TG; j++) {
 			printf(" %c ", grilla[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\nDefiniciones:\n");
+	//Mostramos las definiciones de la grilla.
+	for (i=0;i<TG;i++) {
+		for(j=0; j<2; j++) {
+			printf("Fila %d - %d: %s \n", i+1, j+1, def[respuestas[i][j]]);
+		}
+	}
+	printf("\n");
+}
+void mostrar_grilla_vertical() {
+	/** Muestra al usuario la grilla (en su estado actual) y las definiciones.
+	*/
+	int i,j;
+	system("cls");
+	printf("----****----****----**** Crucigrama Vertical ****----****----****----\n");
+	printf("\n\n");
+	
+	for (i=0;i<TG;i++) {
+		printf("                    %2d)", i+1);
+		
+		for (j=0; j<TG; j++) {
+			printf(" %c ", grilla[j][i]);
 		}
 		printf("\n");
 	}
@@ -199,6 +273,8 @@ int cargar_palabra() {
 				printf("Ingrese el numero de palabra. (1 o 2) ('T' para terminar): ");
 				read_line(ingreso, TI);
 			}
+		
+		
 		if ((ingreso[0] != 't') && (ingreso[0] != 'T')) {
 			columna = atoi(ingreso) - 1;
 			d = (columna == 0) ? 0 : SP;
@@ -211,6 +287,12 @@ int cargar_palabra() {
 						fila+1, columna+1, def[respuestas[fila][columna]], cantidad_de_letras);
 					read_line(ingreso, TI);
 				}
+			for(i=0;i<TI;i++){
+				while((ingreso[i]>=48)&&(ingreso[i]<=57)){
+					printf("\nNo se puede ingresar numero, vuelva a ingresar:\n");
+					read_line(ingreso,TI);
+				}
+			}
 			// Ingreso la palabra en el crucigrama.
 			for (i=0; i < cantidad_de_letras; i++) {
 				grilla[fila][i+d] = ingreso[i];
@@ -226,6 +308,7 @@ int de_tres_letras(const int i, const int j) {
 	    Es 3.
 	*/
 	int es_tres;
+	//if(sentido==1)
 	if (j != 0) {
 		es_tres = 0;
 	} else {
@@ -234,50 +317,79 @@ int de_tres_letras(const int i, const int j) {
 		else
 			es_tres = 1;
 	}
-
 	return es_tres;
+	
 }
 void resultados() {
 	/** Indica al usuario el puntaje obtenido, asi como sus aciertos y errores.
 	*/
-	int puntaje[TG][2], j, i;
+	int puntaje[TG][2], j, i,totalpuntos = 0;
 	// recorrer filas e indicar errores.
 	//resultados
-	for(j=0;j<2;j++){
+	for(j = 0; j < 2; j++){
 		for(i=0;i<TG;i++){
 			puntaje[i][j] = asignar_puntaje(i,j);
-			printf("puntaje: %2i\n",  puntaje[i][j]);
+			totalpuntos=asignar_puntaje(i,j)+totalpuntos;
 		}
+	}	
+	printf("puntaje: %d\n",  totalpuntos);
+	if(puntaje[i][j] == 75){
+		printf("\n\n\n\n");
+		printf(".+.+.+..+.+.+.+.+.+.+.+.+++.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+++");
+	printf("                 FELICITACION: CRUCIGRAMA CORRECTO");
+	printf(".+.+.+..+.+.+.+.+.+.+.+.+++.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+++");
 	}
 	// Dar mensaje de felicitaciones si no hay errores.
 	// Puntaje
-	printf("Muy bien...\n");
 	system("pause");
 }
 
-int asignar_puntaje(const int fila, const int palabra)
-	/** 
-	*/
-{
-	int d, j=0, correcta = 0, cantidad_de_letras;
+int asignar_puntaje(const int fila, const int palabra){
+	int d, j=0, correcta = 0, cantidad_de_letras,puntos;
 	d = palabra * 6;
 	cantidad_de_letras = de_tres_letras(fila, palabra) ? 3 : 4;
 	
 	while ( j<cantidad_de_letras && correcta == 0) {
 		if (grilla[fila][j+d] == '-')
 			correcta = 1;
+			
 		else if (grilla[fila][j+d] != pal[respuestas[fila][palabra]][j])
 			correcta = 2;
 		j++;
 	}
 	
-	return correcta;
+	if(correcta == 0)
+		puntos=cantidad_de_letras;
+	
+	else if(correcta==1){
+		puntos = 0;
+		if(d == 0){
+	printf("la palabra 1 de la fila %d esta vacia.\n",fila+1);
+		}
+		else{
+		printf("la palabra 2 de la fila %d esta vacia.\n",fila+1);
+		}
+	}
+	
+	else{
+		if(d==0){
+		puntos=0;
+		printf("la palabra 1 de la fila %d esta incorrecta.\n",fila+1);
+		}
+		else{
+			printf("la palabra 2 de la fila %d esta incorrecta.\n",fila+1);
+		}
+		
+	}
+	return puntos;
 }
 
 void elegir_palabras() {
 	/** Elige aleatoriamiente las palabras para llenar el crucigrama.
 	*/
-	int i, j, aux;
+	int i, j, aux,hora;
+	hora=time(NULL);
+	srand(hora);
 	for (i=0; i<TG; i++) {
 		for (j=0; j<2; j++) {
 			do {
@@ -301,7 +413,7 @@ int ya_esta(const int valor, const int index) {
 }
 
 char * read_line (char * buf, size_t length) {
-	/**** Robado de home.datacomm.ch/t_wolf/tw/c/getting_input.html#skip
+	/**** Copyright de home.datacomm.ch/t_wolf/tw/c/getting_input.html#skip
 	Read at most 'length'-1 characters from the file 'f' into
 	'buf' and zero-terminate this character sequence. If the
 	line contains more characters, discard the rest.
