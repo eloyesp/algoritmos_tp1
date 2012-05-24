@@ -13,6 +13,7 @@ Roberto Cavalcabué			eltotti_38@hotmail.com
 // Tamanio de la grilla
 #define TG 10 // tamanio de la grilla
 #define SP 6  // inicio de la segunda palabra
+#define TI 6  // Tamanio del ingreso de palabra.
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -109,7 +110,7 @@ void jugar()
 	*/
 	char entrada[3];
 	int opcion;
-	printf("                          1) Horizontal.\n\n");
+	printf("\n\n                          1) Horizontal.\n\n");
 	printf("                          2) Vertical.\n\n");
 
 	printf("                      Ingrese una opcion valida: ");
@@ -227,7 +228,6 @@ void mostrar_grilla_horizontal(void) {
 int cargar_palabra() {
 	/** Permite al usuario cargar una palabra en el crucigrama.
 	*/
-#define TI 6
 	int fila, columna, cantidad_de_letras, i=0, d;
 	char ingreso[TI];
 
