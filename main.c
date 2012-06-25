@@ -49,7 +49,7 @@ int ya_esta(const int valor, const int index);
 
 // Funcion main
 int main(void) {
-	cargar_diccionario();
+	palydef_inicializar();
 	bienvenida();
 
 	while (menu())
