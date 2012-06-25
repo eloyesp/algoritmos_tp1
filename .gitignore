@@ -11,3 +11,6 @@
 # Executables
 *.exe
 *.out
+
+# Zinjai Project Files
+*.zpr
