@@ -1,3 +1,18 @@
+#ifndef USUARIO_H
+#define USUARIO_H
+
+void palydef_inicializar(void);
+void palydef_elegir_palabras(int * respuestas[][2]);
+char * palydef_definicion(const int palabra);
+int palydef_coincide(char * palabra, int respuesta);
+//(n): esta bien (n = cantidad de puntos)
+//(0): esta mal (carga las estadísticas!)
+void palydef_estadisticas(void);
+
+/** TODO: Después de esta linea nada va, hay que borrarlo.
+*/ 
+
+
 // pal son las palabras
 // pal[0-19] tienen 3 letras y pal[20-49] tienen 4 letras.
 // def son las definiciones correspondientes.
@@ -156,4 +171,4 @@ void cargar_diccionario(void)
 	strcpy(pal[49],"taza");
 	strcpy(def[49],"Vasija pequenia para tomar liquidos.");
 }
-
+#endif
