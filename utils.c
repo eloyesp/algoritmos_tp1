@@ -26,3 +26,19 @@ char * read_line (char * buf, size_t length) {
 	} /* end if */
 	return p;
 } /* end read_line */
+
+int de_tres_letras(const int i, const int j, const char sentido) {
+	/** Verdadero si la cantidad de letras que tiene la palabra correspondiente
+		Es 3.
+	*/
+	int es_tres;
+	if (j != 0) {
+		es_tres = 0;
+	} else {
+		if ((sentido == 'H' && (i % 2) == 0) || (sentido == 'V' && (i % 2) == 1))
+			es_tres = 0;
+		else
+			es_tres = 1;
+	}
+	return es_tres;
+}

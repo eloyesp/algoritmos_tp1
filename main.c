@@ -11,7 +11,6 @@ Roberto Cavalcabué			eltotti_38@hotmail.com
 */
 
 // Tamanio de la grilla
-#define TG 10 // tamanio de la grilla
 #define SP 6  // inicio de la segunda palabra
 #define TI 6  // Tamanio del ingreso de palabra.
 #include <stdio.h>
@@ -42,12 +41,8 @@ void mostrar_grilla_horizontal(void);
 char guion_asterisco(const int i, const int j);
 int cargar_palabra(void);
 int palabra_valida(const char input[]);
-int de_tres_letras(const int fila, const int columna);
 void resultados(void);
 int asignar_puntaje(const int fila, const int palabra);
-void elegir_palabras(void);
-char * read_line (char * buf, size_t length);
-int ya_esta(const int valor, const int index);
 
 // Funcion main
 int main(void) {
@@ -149,7 +144,7 @@ void jugar()
 		sentido = 'V';
 	
 	vaciar_grilla();
-	elegir_palabras();
+	palydef_elegir_palabras(respuestas, sentido);
 	
 	mostrar_grilla();
 	while(cargar_palabra()) {
@@ -192,7 +187,7 @@ char guion_asterisco(const int i, const int j) {
 	else if (j > 3 && j < 6)
 		value = '*';
 	else {
-		value = (de_tres_letras(i, 0)) ? '*' : '-';
+		value = (de_tres_letras(i, 0, sentido)) ? '*' : '-';
 	}
 	return value;
 }
@@ -274,7 +269,7 @@ int cargar_palabra() {
 		if ((ingreso[0] != 't') && (ingreso[0] != 'T')) {
 			columna = atoi(ingreso) - 1;
 			d = (columna == 0) ? 0 : SP;
-			cantidad_de_letras = (de_tres_letras(fila, columna)) ? 3 : 4;
+			cantidad_de_letras = (de_tres_letras(fila, columna, sentido)) ? 3 : 4;
 
 			printf("Ingrese la Palabra: ");
 			read_line(ingreso, TI);
@@ -312,22 +307,6 @@ int palabra_valida(const char input[]) {
 	return valida;
 }
 
-int de_tres_letras(const int i, const int j) {
-	/** Verdadero si la cantidad de letras que tiene la palabra correspondiente
-	    Es 3.
-	*/
-	int es_tres;
-	if (j != 0) {
-		es_tres = 0;
-	} else {
-		if ((sentido == 'H' && (i % 2) == 0) || (sentido == 'V' && (i % 2) == 1))
-			es_tres = 0;
-		else
-			es_tres = 1;
-	}
-	return es_tres;
-	
-}
 void resultados() {
 	/** Indica al usuario el puntaje obtenido, asi como sus aciertos y errores.
 	*/
@@ -355,7 +334,7 @@ void resultados() {
 int asignar_puntaje(const int fila, const int palabra){
 	int d, j=0, correcta = 0, cantidad_de_letras, puntos;
 	d = palabra * 6;
-	cantidad_de_letras = de_tres_letras(fila, palabra) ? 3 : 4;
+	cantidad_de_letras = de_tres_letras(fila, palabra, sentido) ? 3 : 4;
 	
 	while ( j<cantidad_de_letras && correcta == 0) {
 		if (grilla[fila][j+d] == '-')
@@ -376,32 +355,4 @@ int asignar_puntaje(const int fila, const int palabra){
 	}
 
 	return puntos;
-}
-
-void elegir_palabras() {
-	/** Elige aleatoriamiente las palabras para llenar el crucigrama.
-	*/
-	int i, j, aux,hora;
-	hora=time(NULL);
-	srand(hora);
-	for (i=0; i<TG; i++) {
-		for (j=0; j<2; j++) {
-			do {
-				aux = (de_tres_letras(i, j)) ? rand()%20 : rand()%30+20;
-			} while ( ya_esta(aux, 2*i + j) );
-
-			respuestas[i][j] = aux;
-		}
-	}
-}
-
-int ya_esta(const int valor, const int index) {
-	/** retorna verdadero si el valor ya esta en la matriz y falso si no esta.
-	    O sea, avisa si la palabra ya fue elegida.
-	*/
-	int i=0;
-	while (valor!=respuestas[0][i] && i<index) {
-		i++;
-	}
-	return (valor == respuestas[0][i]);
 }

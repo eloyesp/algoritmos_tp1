@@ -1,5 +1,11 @@
 #include <string.h>
+#include <time.h>
+#include <stdlib.h>
+
 #include "palydef.h"
+#include "utils.h"
+
+int ya_esta(const int valor, const int index, char respuestas[][2]);
 
 void palydef_inicializar(void)
 	/** Inicializa los vectores pal[] y def[]
@@ -157,4 +163,45 @@ void palydef_inicializar(void)
 	
 	strcpy(pal[49],"taza");
 	strcpy(def[49],"Vasija pequenia para tomar liquidos.");
+}
+
+void palydef_elegir_palabras(int * respuestas[][2], const char sentido) {
+	/** Elige aleatoriamiente las palabras para llenar el crucigrama.
+	*/
+	int i, j, aux;
+	
+	srand(time(NULL));
+	
+	for (i=0; i<TG; i++) {
+		for (j=0; j<2; j++) {
+			do {
+				aux = (de_tres_letras(i, j, sentido)) ? rand()%20 : rand()%30+20;
+			} while ( ya_esta(aux, 2*i + j, respuestas) );
+			
+			respuestas[i][j] = aux;
+		}
+	}
+}
+
+char * palydef_definicion(const int palabra) {
+	
+}
+
+int palydef_coincide(char * palabra, int respuesta) {
+	
+}
+
+void palydef_estadisticas(void ) {
+	
+}
+
+int ya_esta(const int valor, const int index, char respuestas[][2]) {
+	/** retorna verdadero si el valor ya esta en la matriz y falso si no esta.
+	O sea, avisa si la palabra ya fue elegida.
+	*/
+	int i=0;
+	while (valor!=respuestas[0][i] && i<index) {
+		i++;
+	}
+	return (valor == respuestas[0][i]);
 }
