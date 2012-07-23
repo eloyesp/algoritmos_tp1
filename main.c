@@ -58,7 +58,7 @@ int main(void) {
 
 	despedida();
 
-	return 0;
+	return(0);
 }
 
 void bienvenida() {
@@ -68,13 +68,12 @@ void bienvenida() {
 	for (i=0;i<80*2;i++){
 		printf(".*.");
 	}
-
 	printf("\n\n  		Bienvenidos a la Aplicacion Crucigrama!!\n\n");
-
 	for (i=0;i<80*2;i++){
 		printf(".*.");
 	}
-	system("pause");
+
+	PAUSE();
 }
 
 int menu() {
@@ -103,14 +102,18 @@ int menu() {
 		opcion = atoi(entrada);
 	}
 
-	if (opcion==1)
+	if (opcion == 1)
 		usuario_alta();
-	else if(opcion==2)
+	else if(opcion == 2)
 		jugar();
-	else if (opcion==3)
+	else if (opcion == 3) {
 		printf("no implementado");
+		PAUSE();
+	}
 	else
 		return 0;
+
+	return(1);
 }
 
 void jugar()
@@ -119,10 +122,20 @@ void jugar()
 	*/
 	char entrada[3];
 	int opcion;
-	printf("\n\n                          1) Horizontal.\n\n");
-	printf("                          2) Vertical.\n\n");
-
-	printf("                      Ingrese una opcion valida: ");
+	int usuario;
+	
+	// pedir cuil
+	usuario = usuario_login();
+	
+	if (usuario == -2) {
+		printf("Su cuil no es correcto");
+		return;
+	}
+	
+	printf("\n\n"
+		"                          1) Horizontal.\n\n"
+		"                          2) Vertical.\n\n"
+		"                      Ingrese una opcion valida: ");
 	read_line(entrada, 3);
 	opcion = atoi(entrada);
 	while(opcion!=1 && opcion!=2){
