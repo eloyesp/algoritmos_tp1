@@ -5,12 +5,12 @@
 #define  TAM 13
 #define  MAX 11
 
-int profesion_valida(const char profesion[], const char * profesiones[] );
+int profesion_valida(const char profesion[]);
 
 void usuario_alta(void){
 	FILE * usuarios;
 	Usuario nuevo_usuario;
-	char input[MAX_NOMBRE], * profesiones[] = { "contador", "abogado", "ingeniero"};
+	char input[MAX_NOMBRE];
 	
 	usuarios = fopen("usuarios.dat", "wb+");
 	
@@ -19,7 +19,7 @@ void usuario_alta(void){
 	strcpy(nuevo_usuario.profesion, input);
 	if ( usuarios == NULL)
 		printf("No se pudo abrir el archivo.");
-	else if (profesion_valida(input, profesiones)) { 
+	else if (profesion_valida(input)) { 
 		printf("Ingrese Nombre: ");
 		read_line(nuevo_usuario.nombre, MAX_NOMBRE);
 		printf("Apellido: ");
@@ -136,10 +136,9 @@ int usuario_login(void){
 //	}
 }
 
-
-
-int profesion_valida(const char profesion[], const char * profesiones[] ) {
+int profesion_valida(const char profesion[]) {
 	int bien = 0, i = 0;
+	const char * profesiones[] = { "contador", "abogado", "ingeniero"};
 	
 	while (!bien && i < 3) {
 		if (!strcmp(profesion, profesiones[i])) {

@@ -14,9 +14,7 @@ Roberto Cavalcabué			eltotti_38@hotmail.com
 #define SP 6  // inicio de la segunda palabra
 #define TI 6  // Tamanio del ingreso de palabra.
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
-#include <string.h>
 #include "palydef.h"
 #include "usuario.h"
 #include "utils.h"
