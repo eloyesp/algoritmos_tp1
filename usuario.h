@@ -1,6 +1,6 @@
 #ifndef USUARIO_H
 #define USUARIO_H
-#define MAX 40
+#define MAX_NOMBRE 40
 #define VEC 100
 
 typedef struct{
@@ -8,10 +8,11 @@ typedef struct{
 }Fecha;
 
 typedef struct {
-	char nombre[MAX], apellido[MAX];
+	int num_usuario;
+	char nombre[MAX_NOMBRE], apellido[MAX_NOMBRE];
 	int dni;
 	Fecha nacimiento, inscripcion;
-	char profesion[MAX];
+	char profesion[MAX_NOMBRE];
 } Usuario;
 
 int usuario_alta(void);
