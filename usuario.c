@@ -6,71 +6,34 @@
 #define  MAX 11
 
 int profesion_valida(const char profesion[]);
+void cargar_fecha(Fecha * fecha);
 
-void usuario_alta(void){
+void usuario_alta(){
 	FILE * usuarios;
 	Usuario nuevo_usuario;
-	char input[MAX_NOMBRE];
+	char ingreso[MAX_NOMBRE];
 	
 	usuarios = fopen("usuarios.dat", "wb+");
 	
 	printf("Ingrese la profesion: ");
-	read_line(input, MAX_NOMBRE);
-	strcpy(nuevo_usuario.profesion, input);
+	read_line(ingreso, MAX_NOMBRE);
+	strcpy(nuevo_usuario.profesion, ingreso);
 	if ( usuarios == NULL)
 		printf("No se pudo abrir el archivo.");
-	else if (profesion_valida(input)) { 
+	else if (profesion_valida(ingreso)) { 
 		printf("Ingrese Nombre: ");
 		read_line(nuevo_usuario.nombre, MAX_NOMBRE);
 		printf("Apellido: ");
 		read_line(nuevo_usuario.apellido, MAX_NOMBRE);
 		printf("DNI: ");
-		scanf("%d",&nuevo_usuario.dni);
+		read_line(ingreso, MAX_NOMBRE);
+		nuevo_usuario.dni = atoi(ingreso);
 		printf("Fecha de nacimiento:\n");
-		printf("Dia: ");
-		scanf("%d",&nuevo_usuario.nacimiento.dia);
-		while(nuevo_usuario.nacimiento.dia < 0 || nuevo_usuario.nacimiento.dia > 32){
-			printf("Dia incorrecto vuelva a ingresar: ");
-			printf("Dia: ");
-			scanf("%d",&nuevo_usuario.nacimiento.dia);
-		}
-		printf("Mes: ");
-		scanf("%d",&nuevo_usuario.nacimiento.mes);
-		while(nuevo_usuario.nacimiento.mes < 0 || nuevo_usuario.nacimiento.mes > 13){
-			printf("Mes incorrecto vuelva a ingresar: ");
-			printf("Mes: ");
-			scanf("%d",&nuevo_usuario.nacimiento.mes);
-		}
-		printf("Anio: ");
-		scanf("%d",&nuevo_usuario.nacimiento.anio);
-		while(nuevo_usuario.nacimiento.anio < 1900 || nuevo_usuario.nacimiento.anio > 2012){
-			printf("Anio incorrecto vuelva a ingresar: ");
-			printf("Anio: ");
-			scanf("%d",&nuevo_usuario.nacimiento.anio);
-		}
-		printf("Fecha de ingreso al colegio:\n");
-		printf("Dia: ");
-		scanf("%d",&nuevo_usuario.inscripcion.dia);
-		while(nuevo_usuario.inscripcion.dia < 0 && nuevo_usuario.inscripcion.dia > 32){
-			printf("Dia incorrecto vuelva a ingresar: ");
-			printf("Dia: ");
-			scanf("%d",&nuevo_usuario.inscripcion.dia);
-		}
-		printf("Mes: ");
-		scanf("%d",&nuevo_usuario.inscripcion.mes);
-		while(nuevo_usuario.inscripcion.mes < 0 && nuevo_usuario.inscripcion.mes > 13){
-			printf("Mes incorrecto vuelva a ingresar: ");
-			printf("Mes: ");
-			scanf("%d",&nuevo_usuario.inscripcion.mes);
-		}
+		cargar_fecha(&nuevo_usuario.nacimiento);
 		
-		printf("Anio: ");
-		scanf("%d",&nuevo_usuario.inscripcion.anio);
-		while(nuevo_usuario.inscripcion.anio < 1900 && nuevo_usuario.inscripcion.anio > 2012){
-			printf("Anio incorrecto vuelva a ingresar: ");
-			printf("Anio: ");
-			scanf("%d",&nuevo_usuario.inscripcion.anio);
-		}
+		printf("Fecha de ingreso al colegio:\n");
+		cargar_fecha(&nuevo_usuario.inscripcion);
+		
 		nuevo_usuario.num_usuario = 0;	
 		
 		fseek(usuarios, (nuevo_usuario.num_usuario) * sizeof(Usuario), SEEK_END);
@@ -92,12 +55,11 @@ int usuario_login(void){
 	// (-1): no registrado
 	// (-2): cuil invalido
 	char ingreso[15];
-	printf("Ingrese el numero de CUIL:en este formato 99-99999999-99: ");
+	printf("Ingrese el numero de CUIL(Ej. 99-99999999-99): ");
 	read_line(ingreso, 15);
+	
 	return(-1);
-//	printf("Ingrese el numero de CUIL (en este formato 99-99999999-99): ");
-//	gets(v);
-//	
+	
 //	if( v[0]!= 2 && (v[1]!= 7 || v[1]!= 0))
 //		return -2;
 //	
@@ -147,4 +109,30 @@ int profesion_valida(const char profesion[]) {
 		i++;
 	}
 	return bien;
+}
+
+void cargar_fecha(Fecha * fecha){
+
+	printf("Dia: ");
+	scanf("%d",&(fecha->dia));
+	while((fecha->dia) < 0 || (fecha->dia) > 32){
+		printf("Dia incorrecto vuelva a ingresar: ");
+		printf("Dia: ");
+		scanf("%d",&(fecha->dia));
+	}
+	printf("Mes: ");
+	scanf("%d",&(fecha->mes));
+	while((fecha->mes) < 0 || (fecha->mes) > 13){
+		printf("Mes incorrecto vuelva a ingresar: ");
+		printf("Mes: ");
+		scanf("%d",&(fecha->mes));
+	}
+	printf("Anio: ");
+	scanf("%d",&(fecha->anio));
+	while((fecha->anio) < 1900 || (fecha->anio > 2012)){
+		printf("Anio incorrecto vuelva a ingresar: ");
+		printf("Anio: ");
+		scanf("%d",&(fecha->anio));
+	}
+	
 }
