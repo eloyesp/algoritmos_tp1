@@ -85,14 +85,15 @@ int menu() {
 	// Limpiar la pantalla
 	system("cls");
 
-	printf("---****----****----**** Crucigrama Horizontal o Vertical ****----****----****---");
-	printf("\n\n\n\n");
-	printf("                          Menu principal\n");
-	printf("						  1) Alta de usuario.");
-	printf("                          2) Jugar.\n\n");
-	printf("                          3) Estadisticas.\n\n");
-	printf("						  4) Salir.\n\n");
-	printf("                      Ingrese una opcion valida: ");
+	printf(
+		"---****----****----**** Crucigrama Horizontal o Vertical ****----****----****---"
+		"\n\n\n\n"
+		"                          Menu principal\n\n"
+		"                          1) Alta de usuario.\n\n"
+		"                          2) Jugar.\n\n"
+		"                          3) Estadisticas.\n\n"
+		"                          4) Salir.\n\n"
+		"                      Ingrese una opcion valida: ");
 	read_line(entrada, 3);
 	opcion = atoi(entrada);
 
