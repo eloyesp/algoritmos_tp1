@@ -36,7 +36,7 @@ int usuario_alta(void){
 	}
 	else
 		printf("No puede cargar sus datos. Recuerde que para registrarse tiene que ser Contador, Abogado o Ingeniero.");
-	return 0;
+	return(0);
 }
 
 int  usuario_login(void){
