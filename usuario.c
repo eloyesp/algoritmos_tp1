@@ -1,5 +1,6 @@
+#include "usuario.h"
 #include <stdio.h>
-#include <sting.h>
+#include <string.h>
 #define MAX 40
 #define VEC 100
 int usuario_alta(void){
@@ -7,7 +8,7 @@ FILE *F;
 	F=fopen("usuarios.dat","w+");
 	
 	Usuario alta;
-	char profesion1={'c','o','n','t','a','d','o','r'},profesion2={'a','b','o','g','a','d','o'},profesion3={'i','n','g','e','n','i','e','r','o'};
+	char cadena,profesion1={'c','o','n','t','a','d','o','r'},profesion2={'a','b','o','g','a','d','o'},profesion3={'i','n','g','e','n','i','e','r','o'};
 	printf("Ingrese la profesion:");
 	gets(cadena);
 	

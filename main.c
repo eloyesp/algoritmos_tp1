@@ -19,6 +19,7 @@ Roberto Cavalcabué			eltotti_38@hotmail.com
 #include <stdlib.h>
 #include <string.h>
 #include "palydef.h"
+#include "usuario.h"
 
 /**   Variables globales:
 */
@@ -87,8 +88,10 @@ int menu() {
 	printf("---****----****----**** Crucigrama Horizontal o Vertical ****----****----****---");
 	printf("\n\n\n\n");
 	printf("                          Menu principal\n");
-	printf("                          1) Jugar.\n\n");
-	printf("                          2) Salir.\n\n");
+	printf("						  1) Alta de usuario.");
+	printf("                          2) Jugar.\n\n");
+	printf("                          3) Estadisticas.\n\n");
+	printf("						  4) Salir.\n\n");
 	printf("                      Ingrese una opcion valida: ");
 	read_line(entrada, 3);
 	opcion = atoi(entrada);
@@ -411,4 +414,3 @@ char * read_line (char * buf, size_t length) {
 	} /* end if */
 	return p;
 } /* end read_line */
-
