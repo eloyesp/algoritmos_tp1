@@ -20,6 +20,7 @@ Roberto Cavalcabué			eltotti_38@hotmail.com
 #include <string.h>
 #include "palydef.h"
 #include "usuario.h"
+#include "utils.h"
 
 /**   Variables globales:
 */
@@ -53,8 +54,7 @@ int main(void) {
 	palydef_inicializar();
 	bienvenida();
 
-	while (menu())
-		jugar();
+	while (menu());
 
 	despedida();
 
@@ -97,14 +97,18 @@ int menu() {
 	read_line(entrada, 3);
 	opcion = atoi(entrada);
 
-	while(opcion!=1 && opcion!=2){
+	while(opcion < 1 || opcion > 4 ){
 		printf("\nIngreso una opcion incorrecta.\nIngrese nuevamente la opcion que desea: ");
 		read_line(entrada, 3);
 		opcion = atoi(entrada);
 	}
 
 	if (opcion==1)
-		return 1;
+		usuario_alta();
+	else if(opcion==2)
+		jugar();
+	else if (opcion==3)
+		printf("no implementado");
 	else
 		return 0;
 }
@@ -388,30 +392,3 @@ int ya_esta(const int valor, const int index) {
 	}
 	return (valor == respuestas[0][i]);
 }
-
-char * read_line (char * buf, size_t length) {
-	/**** Copyright de home.datacomm.ch/t_wolf/tw/c/getting_input.html#skip
-	Read at most 'length'-1 characters from the file 'f' into
-	'buf' and zero-terminate this character sequence. If the
-	line contains more characters, discard the rest.
-	*/
-
-	char *p;
-
-	if ((p = fgets (buf, length, stdin))) {
-		size_t last = strlen (buf) - 1;
-
-		if (buf[last] == '\n') {
-			/**** Discard the trailing newline */
-			buf[last] = '\0';
-		} else {
-			/**** There's no newline in the buffer, therefore there must be
-			more characters on that line: discard them!
-			*/
-			fscanf (stdin, "%*[^\n]");
-			/**** And also discard the newline... */
-			(void) fgetc (stdin);
-		} /* end if */
-	} /* end if */
-	return p;
-} /* end read_line */
