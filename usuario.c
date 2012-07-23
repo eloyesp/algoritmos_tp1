@@ -59,9 +59,10 @@ int  usuario_login(void){
 	// retorna un numero de usuario
 	// (-1): no registrado
 	// (-2): cuil invalido
-	printf("Ingrese el numero de CUIL:en este formato 99-99999999-99");
-	scanf("%s", NULL);
-	return(0);
+	char ingreso[15];
+	printf("Ingrese el numero de CUIL:en este formato 99-99999999-99: ");
+	read_line(ingreso, 15);
+	return(-1);
 }
 
 int profesion_valida() {
