@@ -212,7 +212,7 @@ void mostrar_grilla(void) {
 	//Mostramos las definiciones de la grilla.
 	for (i=0;i<TG;i++) {
 		for(j=0; j<2; j++) {
-			printf("%s %d - %d: %s \n", fila_columna, i+1, j+1, def[respuestas[i][j]]);
+			printf("%s %d - %d: %s \n", fila_columna, i+1, j+1, palydef_definicion(respuestas[i][j]));
 		}
 	}
 	printf("\n");
@@ -222,7 +222,7 @@ void mostrar_grilla_vertical(void) {
 	int i, j;
 	printf("                         1  2  3  4  5  6  7  8  9  10\n");
 	for (i=0;i<TG;i++) {
-		printf("                        ", i+1);
+		printf("                        ");
 		for (j=0; j<TG; j++) {
 			printf(" %c ", grilla[j][i]);
 		}
