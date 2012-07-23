@@ -8,11 +8,11 @@ typedef struct{
 }Fecha;
 
 typedef struct {
-	char nombre[MAX],apellido[MAX];
+	char nombre[MAX], apellido[MAX];
 	int dni;
-	Fecha nacimiento,inscripcion;
+	Fecha nacimiento, inscripcion;
 	char profesion[MAX];
-}Usuario;
+} Usuario;
 
 int usuario_alta(void);
 // retorna 0 en caso de error.
