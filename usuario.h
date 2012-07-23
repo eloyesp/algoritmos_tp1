@@ -15,7 +15,7 @@ typedef struct {
 	char profesion[MAX_NOMBRE];
 } Usuario;
 
-int usuario_alta(void);
+void usuario_alta(void);
 // retorna 0 en caso de error.
 
 int  usuario_login(void);

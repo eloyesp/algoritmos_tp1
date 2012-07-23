@@ -7,7 +7,7 @@
 
 int profesion_valida(const char profesion[], const char * profesiones[] );
 
-int usuario_alta(void){
+void usuario_alta(void){
 	FILE * usuarios;
 	Usuario nuevo_usuario;
 	char input[MAX_NOMBRE], * profesiones[] = { "contador", "abogado", "ingeniero"};
@@ -19,75 +19,70 @@ int usuario_alta(void){
 	strcpy(nuevo_usuario.profesion, input);
 	if ( usuarios == NULL)
 		printf("No se pudo abrir el archivo.");
-	else {
-		if (profesion_valida(input, profesiones)) {
-			printf("Ingrese Nombre: ");
-			read_line(nuevo_usuario.nombre, MAX_NOMBRE);
-			printf("Apellido: ");
-			read_line(nuevo_usuario.apellido, MAX_NOMBRE);
-			printf("DNI: ");
-			scanf("%d",&nuevo_usuario.dni);
-			printf("Fecha de nacimiento:\n");
+	else if (profesion_valida(input, profesiones)) { 
+		printf("Ingrese Nombre: ");
+		read_line(nuevo_usuario.nombre, MAX_NOMBRE);
+		printf("Apellido: ");
+		read_line(nuevo_usuario.apellido, MAX_NOMBRE);
+		printf("DNI: ");
+		scanf("%d",&nuevo_usuario.dni);
+		printf("Fecha de nacimiento:\n");
+		printf("Dia: ");
+		scanf("%d",&nuevo_usuario.nacimiento.dia);
+		while(nuevo_usuario.nacimiento.dia < 0 || nuevo_usuario.nacimiento.dia > 32){
+			printf("Dia incorrecto vuelva a ingresar: ");
 			printf("Dia: ");
 			scanf("%d",&nuevo_usuario.nacimiento.dia);
-			while(nuevo_usuario.nacimiento.dia < 0 || nuevo_usuario.nacimiento.dia > 32){
-				printf("Dia incorrecto vuelva a ingresar: ");
-				printf("Dia: ");
-				scanf("%d",&nuevo_usuario.nacimiento.dia);
-			}
+		}
+		printf("Mes: ");
+		scanf("%d",&nuevo_usuario.nacimiento.mes);
+		while(nuevo_usuario.nacimiento.mes < 0 || nuevo_usuario.nacimiento.mes > 13){
+			printf("Mes incorrecto vuelva a ingresar: ");
 			printf("Mes: ");
 			scanf("%d",&nuevo_usuario.nacimiento.mes);
-			while(nuevo_usuario.nacimiento.mes < 0 || nuevo_usuario.nacimiento.mes > 13){
-				printf("Mes incorrecto vuelva a ingresar: ");
-				printf("Mes: ");
-				scanf("%d",&nuevo_usuario.nacimiento.mes);
-			}
+		}
+		printf("Anio: ");
+		scanf("%d",&nuevo_usuario.nacimiento.anio);
+		while(nuevo_usuario.nacimiento.anio < 1900 || nuevo_usuario.nacimiento.anio > 2012){
+			printf("Anio incorrecto vuelva a ingresar: ");
 			printf("Anio: ");
 			scanf("%d",&nuevo_usuario.nacimiento.anio);
-			while(nuevo_usuario.nacimiento.anio < 1900 || nuevo_usuario.nacimiento.anio > 2012){
-				printf("Anio incorrecto vuelva a ingresar: ");
-				printf("Anio: ");
-				scanf("%d",&nuevo_usuario.nacimiento.anio);
-			}
-			printf("Fecha de ingreso al colegio:\n");
+		}
+		printf("Fecha de ingreso al colegio:\n");
+		printf("Dia: ");
+		scanf("%d",&nuevo_usuario.inscripcion.dia);
+		while(nuevo_usuario.inscripcion.dia < 0 && nuevo_usuario.inscripcion.dia > 32){
+			printf("Dia incorrecto vuelva a ingresar: ");
 			printf("Dia: ");
 			scanf("%d",&nuevo_usuario.inscripcion.dia);
-			while(nuevo_usuario.inscripcion.dia < 0 && nuevo_usuario.inscripcion.dia > 32){
-				printf("Dia incorrecto vuelva a ingresar: ");
-				printf("Dia: ");
-				scanf("%d",&nuevo_usuario.inscripcion.dia);
-			}
+		}
+		printf("Mes: ");
+		scanf("%d",&nuevo_usuario.inscripcion.mes);
+		while(nuevo_usuario.inscripcion.mes < 0 && nuevo_usuario.inscripcion.mes > 13){
+			printf("Mes incorrecto vuelva a ingresar: ");
 			printf("Mes: ");
 			scanf("%d",&nuevo_usuario.inscripcion.mes);
-			while(nuevo_usuario.inscripcion.mes < 0 && nuevo_usuario.inscripcion.mes > 13){
-				printf("Mes incorrecto vuelva a ingresar: ");
-				printf("Mes: ");
-				scanf("%d",&nuevo_usuario.inscripcion.mes);
-			}
-			
+		}
+		
+		printf("Anio: ");
+		scanf("%d",&nuevo_usuario.inscripcion.anio);
+		while(nuevo_usuario.inscripcion.anio < 1900 && nuevo_usuario.inscripcion.anio > 2012){
+			printf("Anio incorrecto vuelva a ingresar: ");
 			printf("Anio: ");
 			scanf("%d",&nuevo_usuario.inscripcion.anio);
-			while(nuevo_usuario.inscripcion.anio < 1900 && nuevo_usuario.inscripcion.anio > 2012){
-				printf("Anio incorrecto vuelva a ingresar: ");
-				printf("Anio: ");
-				scanf("%d",&nuevo_usuario.inscripcion.anio);
-			}
-			nuevo_usuario.num_usuario = 0;	
-			
-			fseek(usuarios, (nuevo_usuario.num_usuario) * sizeof(Usuario), SEEK_END);
-			fwrite(&nuevo_usuario, sizeof(Usuario), 1, usuarios);
-			printf("Enhorabuena, ha sido registrado: %s, %i",
-				nuevo_usuario.nombre,
-				nuevo_usuario.num_usuario);
-			PAUSE();
-			return 1;
-		} else {
-			return -1;
 		}
-		fclose(usuarios);
+		nuevo_usuario.num_usuario = 0;	
+		
+		fseek(usuarios, (nuevo_usuario.num_usuario) * sizeof(Usuario), SEEK_END);
+		fwrite(&nuevo_usuario, sizeof(Usuario), 1, usuarios);
+		printf("Enhorabuena, ha sido registrado: %s, %i",
+			nuevo_usuario.nombre,
+			nuevo_usuario.num_usuario);
+		PAUSE();
 	}
+	fclose(usuarios);
 }		
-			
+
 
 int usuario_login(void){
 	char v[TAM], vector[MAX];
