@@ -2,11 +2,14 @@
 #include "utils.h"
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 #define  TAM 13
-#define  MAX 11
+#define  CUIL 15
 
 int profesion_valida(const char profesion[]);
 void cargar_fecha(Fecha * fecha);
+int validar_cuil(char * ingreso);
 
 void usuario_alta(){
 	FILE * usuarios;
@@ -48,54 +51,12 @@ void usuario_alta(){
 
 
 int usuario_login(void){
-	char v[TAM], vector[MAX];
-	int i,j,numero=0,comparar,aux,vector_control[10]={5,4,3,2,7,6,5,4,3,2},vector_aux[11];
-	
-	// retorna un numero de usuario
-	// (-1): no registrado
-	// (-2): cuil invalido
-	char ingreso[15];
-	printf("Ingrese el numero de CUIL(Ej. 99-99999999-99): ");
-	read_line(ingreso, 15);
-	
-	return(-1);
-	
-//	if( v[0]!= 2 && (v[1]!= 7 || v[1]!= 0))
-//		return -2;
-//	
-//	j=0;
-//	for (i=0; i<TAM; i++){/*aca borro los guiones*/
-//		if(i==2 || i==11){
-//			i++;
-//			vector[j]=v[i];
-//		}
-//		vector[j]=v[i];
-//		j++;
-//	}
-//	
-//	for(i=0;i<MAX;i++){
-//		vector_aux[i] = atoi(&vector[i]);
-//	}
-//	
-//	
-//	
-//	for(i=0;i<10;i++){
-//		vector_aux[i]=vector_aux[i]*vector_control[i];
-//		numero=numero+vector_aux[i];
-//	}
-//	
-//	aux=numero%11;
-//	
-//	comparar=11-aux;
-//	
-//	if(comparar==vector[10]){
-//		printf("codigo correcto :)");/*codigo correcto*/
-//		return -1; 
-//	}
-//	else {
-//		printf("no es correcto :(");
-//		return -2;
-//	}
+	char ingreso[CUIL];
+	int usuario;
+	printf("Ingrese el numero de CUIL (Ej. 99-99999999-99): ");
+	read_line(ingreso, CUIL);
+	usuario = validar_cuil(ingreso);
+	return usuario;
 }
 
 int profesion_valida(const char profesion[]) {
@@ -135,4 +96,51 @@ void cargar_fecha(Fecha * fecha){
 		scanf("%d",&(fecha->anio));
 	}
 	
+}
+
+int validar_cuil(char * ingreso) {
+	char cuil[CUIL];
+	int i, tipo, dni, verificador, suma = 0;
+	const int base[10] = {5, 4, 3, 2, 7, 6, 5, 4, 3, 2 };
+	
+	for (i=0; i < 14; i++) {
+		if (i == 2 || i == 11) {
+			if (ingreso[i] != '-')
+				return -2;
+		} else if (i == 13) {
+			if (ingreso[i] != '\0')
+				return -2;
+		} else if (!isdigit(ingreso[i])) {
+			return -2;
+		}
+	}
+	
+	for (i=0; i<2; i++) {
+		cuil[i] = ingreso[i];
+	}
+	cuil[i] = '\0';
+	
+	tipo = atoi(cuil);
+	if ( tipo != 20 && tipo != 23 && tipo != 27)
+		return -2;
+	
+	strncat(cuil, ingreso + 3, 8);
+	dni = atoi(cuil + 2);
+	
+	for (i=0; i < 10; i++){
+		suma += (cuil[i] - '0') * base[i];
+	}
+	
+	verificador = 11 - (suma % 11);
+	if (verificador == 11) 
+		verificador = 0;
+	else {
+		if (verificador == 10)
+			verificador = 9;
+	}
+	
+	if ((int) (ingreso[12] - '0') == verificador)
+		return dni;
+	else
+		return -2;
 }
