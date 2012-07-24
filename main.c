@@ -100,8 +100,11 @@ int menu() {
 	else if(opcion == 2)
 		jugar();
 	else if (opcion == 3) {
+		printf(".*.*.*.*.*.*.*.*.*.*.*.*. ESTADISTICAS DEL CRUCIGRAMA .*.*.*.*.*.*.*.*.*.*.*.");
+		printf("\n\n\n\n");
 		usuario_estadisticas();
-		printf("no implementado");
+		palydef_estadisticas();
+		printf(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.");
 		PAUSE();
 	}
 	else

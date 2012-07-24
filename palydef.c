@@ -191,8 +191,18 @@ int palydef_coincide(char * palabra, int respuesta) {
 	return 0;
 }
 
-void palydef_estadisticas(void ) {
+void palydef_estadisticas(void) {
+	char palabra_mas_adivinada[] = "Ogro";
+	char palabra_menos_adivinada[] = "Casa";
+	int palabras_adivinadas = 335;
+	int palabras_acertadas_terminadas_en_o = 13;
+	int palabras_acertadas_con_r = 200;
 	
+	/*buscamos la palabra mas adivinada.. si s una solo imprimimos una y si son varias se imrimen esas varias*/
+	printf("\n(*) La palabra mas adivinada es %s\n", palabra_mas_adivinada);
+	printf("\n(*) La palabra menos adivinada es %s\n", palabra_menos_adivinada);
+	printf("\n(*) El porcentaje de palabras acertadas terminadas con la letra O es: %.2f%%\n", (float) palabras_acertadas_terminadas_en_o / palabras_adivinadas);
+	printf("\n(*) El porcentaje de palabras acertadas que contienen la letra R en algun lugar de la palabra es : %.2f%%\n", (float) palabras_acertadas_con_r / palabras_adivinadas);
 }
 
 int ya_esta(const int valor, const int index, int respuestas[][2]) {

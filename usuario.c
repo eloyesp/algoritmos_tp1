@@ -168,8 +168,6 @@ void usuario_estadisticas(void) {
 	int completos_abogados = 1;
 	int completos_contadores = 2;
 		
-	printf(".*.*.*.*.*.*.*.*.*.*.*.*. ESTADISTICAS DEL CRUCIGRAMA .*.*.*.*.*.*.*.*.*.*.*.");
-	printf("\n\n\n\n");
 	printf("(*) El jugador que mas veces jugo crucigramas es: %s.\n", jugador_cantidad_de_partidas);
 	if (cantidad_de_ganados > 0) {
 		printf("\n(*) El jugador que mas veces obtuvo un puntaje perfecto, es decir, 75 puntos es %s.\n", jugador_cantidad_de_ganados);
@@ -183,14 +181,5 @@ void usuario_estadisticas(void) {
 		printf("\n(*) El jugador que obtuvo el puntaje mas alto en el juego es: %s\n", jugador_mayor_puntaje);
 		printf("\n(*) Su mayor puntaje es %d\n", mayor_puntaje); /*El mayor punaje del usuario que pide las estadisticas*/
 	}
-// Esto corresponde a la funcion palydef_estadisticas
-//	/*buscamos la palabra mas adivinada.. si s una solo imprimimos una y si son varias se imrimen esas varias*/
-//	printf("\n(*) La palabra mas adivinada es OGRO\n"); /*ogro es ejemplo :P */
-//	/*idem para la o las palabras menos adivinadas*/
-//	printf("\n(*) La palabra menos adivinada es CASA\n");
-//	printf("\n(*) El porcentaje de palabras acertadas terminadas con la letra O es: 46.12\n");
-//	printf("\n(*) El porcentaje de palabras que contienen la letra R en algun lugar de la palabra es : 65.24\n");
-//	
-//	printf(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.");
 }
 
