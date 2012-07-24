@@ -10,20 +10,19 @@
 int profesion_valida(const char profesion[]);
 void cargar_fecha(Fecha * fecha);
 int validar_cuil(char * ingreso);
+int cantidad_de_registros(FILE * usuarios);
 
-void usuario_alta(){
+void usuario_alta() {
 	FILE * usuarios;
 	Usuario nuevo_usuario;
 	char ingreso[MAX_NOMBRE];
+
+	usuarios = fopen("usuarios.dat", "ab+");
 	
-	usuarios = fopen("usuarios.dat", "wb+");
-	
-	printf("Ingrese la profesion: ");
-	read_line(ingreso, MAX_NOMBRE);
-	strcpy(nuevo_usuario.profesion, ingreso);
-	if ( usuarios == NULL)
-		printf("No se pudo abrir el archivo.");
-	else if (profesion_valida(ingreso)) { 
+	if (usuarios != NULL) {
+		// Ingreso de datos
+		printf("Ingrese la profesion: ");
+		read_line(nuevo_usuario.profesion, MAX_NOMBRE);
 		printf("Ingrese Nombre: ");
 		read_line(nuevo_usuario.nombre, MAX_NOMBRE);
 		printf("Apellido: ");
@@ -33,22 +32,21 @@ void usuario_alta(){
 		nuevo_usuario.dni = atoi(ingreso);
 		printf("Fecha de nacimiento:\n");
 		cargar_fecha(&nuevo_usuario.nacimiento);
-		
 		printf("Fecha de ingreso al colegio:\n");
 		cargar_fecha(&nuevo_usuario.inscripcion);
-		
-		nuevo_usuario.num_usuario = 0;	
-		
-		fseek(usuarios, (nuevo_usuario.num_usuario) * sizeof(Usuario), SEEK_END);
+		nuevo_usuario.num_usuario = cantidad_de_registros(usuarios) + 1;
+		// Registro en el archivo
+		fseek(usuarios, (nuevo_usuario.num_usuario - 1) * sizeof(Usuario), SEEK_SET);
 		fwrite(&nuevo_usuario, sizeof(Usuario), 1, usuarios);
-		printf("Enhorabuena, ha sido registrado: %s, %i",
-			nuevo_usuario.nombre,
-			nuevo_usuario.num_usuario);
-		PAUSE();
+		printf("Enhorabuena %s, ha sido registrado con el numero de usuario: %i", nuevo_usuario.nombre, nuevo_usuario.num_usuario);
+		fclose(usuarios);
+	} else {
+		puts("No se pudo abrir el archivo");
 	}
-	fclose(usuarios);
+	
+	PAUSE();
+	return;
 }		
-
 
 int usuario_login(void){
 	char ingreso[CUIL];
@@ -143,4 +141,12 @@ int validar_cuil(char * ingreso) {
 		return dni;
 	else
 		return -2;
+}
+
+int cantidad_de_registros(FILE * usuarios) {
+	/** Retorna la cantidad de registros existentes y ubica el puntero al final
+	    del archivo para realizar una escritura.
+	*/
+	fseek(usuarios, 0, SEEK_END);
+	return ftell(usuarios)/sizeof(Usuario);
 }
