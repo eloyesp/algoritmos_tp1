@@ -326,7 +326,7 @@ void resultados() {
 	
 	// Puntaje
 	printf("puntaje: %d de 75 (%.2f %%)\n",  totalpuntos, (float) totalpuntos / 75 * 100 );
-	system("pause");
+	PAUSE();
 }
 
 int asignar_puntaje(const int fila, const int palabra){
