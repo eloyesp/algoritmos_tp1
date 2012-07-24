@@ -53,13 +53,32 @@ void usuario_alta() {
 	return;
 }		
 
-int usuario_login(void){
+int usuario_login(void) {
+	Usuario usuario;
+	FILE * usuarios; 
 	char ingreso[CUIL];
-	int usuario;
-	printf("Ingrese el numero de CUIL (Ej. 99-99999999-99): ");
+	int dni, num_usuario = -1;
+	
+	printf("Ingrese el numero de CUIL (Ej. 99-99999999-9): ");
 	read_line(ingreso, CUIL);
-	usuario = validar_cuil(ingreso);
-	return usuario;
+	dni = validar_cuil(ingreso);
+	if (dni == -2)
+		return dni;
+	else {
+		usuarios = fopen(USUARIOS, "rb");
+		if (usuarios == NULL)
+			printf("El archivo no se pudo abrir.");
+		else {
+			while (num_usuario == -1 && !feof(usuarios)) {
+				fread(&usuario, sizeof(Usuario), 1, usuarios);
+				if (dni == usuario.dni) {
+					num_usuario = usuario.num_usuario;
+				}
+			}
+		}
+	}
+	
+	return num_usuario;
 }
 
 int profesion_valida(const char profesion[]) {
