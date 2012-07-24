@@ -176,36 +176,59 @@ int cantidad_de_registros(FILE * usuarios) {
 }
 
 void usuario_estadisticas(void) {
-	
-//	Usuario usuario;
-//	FILE * usuarios; 
-//	usuarios = fopen(USUARIOS, "rb+");
-//	
-//	if (usuarios == NULL)
-//		printf("El archivo no se pudo abrir.");
-//	else {
-//		while (!feof(usuarios)) {
-//		fread(&usuario, sizeof() )	
-//		}
-//		
-//	}
-	
-	int mayor_cantidad_de_partidas = 45;
+	Usuario usuario;
+	FILE * usuarios; 
+		
+	int mayor_cantidad_de_partidas = -1;
 	char jugador_cantidad_de_partidas[] = "jugador_cantidad_de_partidas";
 	
 	char jugador_cantidad_de_ganados[] = "jugador_cantidad_de_ganados";
 	int cantidad_de_ganados = 0;
 	
-	int mayor_puntaje=69;
+	int mayor_puntaje = -1;
 	char jugador_mayor_puntaje[] = "jugador_mayor_puntaje";
 	
-	int mayor_puntaje_solicito = 3;
+	// int mayor_puntaje_solicito = 3;
 	
-	int total_completos = 5;
-	int completos_ingenieros = 2;
-	int completos_abogados = 1;
-	int completos_contadores = 2;
-		
+	int total_completos = 0;
+	int completos_ingenieros = 0;
+	int completos_abogados = 0;
+	int completos_contadores = 0;
+
+	usuarios = fopen(USUARIOS, "rb");
+	
+	if (usuarios == NULL)
+		printf("El archivo no se pudo abrir.");
+	else {
+		while (fread(&usuario, sizeof(Usuario), 1, usuarios)) {
+//			printf("%2i - %2i - %2i - %2i\n", usuario.num_usuario,
+//				usuario.partidas_jugadas, usuario.mayor_puntaje, usuario.crucigramas_completos);
+			if (usuario.partidas_jugadas > mayor_cantidad_de_partidas) {
+				mayor_cantidad_de_partidas = usuario.partidas_jugadas;
+				strcpy(jugador_cantidad_de_partidas, usuario.nombre);
+			}
+			// TODO: if mayor puntaje tiene empate.
+			if (usuario.mayor_puntaje > mayor_puntaje) {
+				mayor_puntaje = usuario.mayor_puntaje;
+				strcpy(jugador_mayor_puntaje, usuario.nombre);
+			}
+			if (usuario.crucigramas_completos > cantidad_de_ganados) {
+				cantidad_de_ganados = usuario.crucigramas_completos;
+				strcpy(jugador_cantidad_de_ganados, usuario.nombre);
+			}
+			total_completos += usuario.crucigramas_completos;
+			if (!strcmp(usuario.profesion, "abogado")) {
+				completos_abogados += usuario.crucigramas_completos;
+			} else if (!strcmp(usuario.profesion, "contador")) {
+				completos_contadores += usuario.crucigramas_completos;
+			} else if (!strcmp(usuario.profesion, "ingeniero")) {
+				completos_ingenieros += usuario.crucigramas_completos;
+			}
+				
+		}
+		fclose(usuarios);
+	}
+	
 	printf("(*) El jugador que mas veces jugo crucigramas es: %s.\n", jugador_cantidad_de_partidas);
 	if (cantidad_de_ganados > 0) {
 		printf("\n(*) El jugador que mas veces obtuvo un puntaje perfecto, es decir, 75 puntos es %s.\n", jugador_cantidad_de_ganados);
