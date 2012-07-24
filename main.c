@@ -248,13 +248,19 @@ int cargar_palabra() {
 	/** Permite al usuario cargar una palabra en el crucigrama.
 	*/
 	int fila, columna, cantidad_de_letras, i=0, d;
-	char ingreso[TI];
+	char ingreso[TI], fila_columna[8];
+	
+	if (sentido == 'H') {
+		strcpy(fila_columna, "Fila");		
+	} else {
+		strcpy(fila_columna, "Columna");
+	}
 
-	printf("Ingrese la fila: ");
+	printf("Ingrese la %s: ", fila_columna);
 	read_line(ingreso, TI);
 	while (!((atoi(ingreso) <= 10 && atoi(ingreso) >= 1) || ((ingreso[0] == 't'
 		|| ingreso[0] == 'T') && ingreso[1] == '\0'))) {
-		printf("Ingrese la fila (entre 1 y 10) ('T' para terminar): ");
+		printf("Ingrese la %s (entre 1 y 10) ('T' para terminar): ", fila_columna);
 		read_line(ingreso, TI);
 	}
 	if ((ingreso[0] != 't') && (ingreso[0] != 'T')) {
