@@ -100,6 +100,7 @@ int menu() {
 	else if(opcion == 2)
 		jugar();
 	else if (opcion == 3) {
+		usuario_estadisticas();
 		printf("no implementado");
 		PAUSE();
 	}

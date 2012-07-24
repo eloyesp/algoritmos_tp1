@@ -150,3 +150,47 @@ int cantidad_de_registros(FILE * usuarios) {
 	fseek(usuarios, 0, SEEK_END);
 	return ftell(usuarios)/sizeof(Usuario);
 }
+
+void usuario_estadisticas(void) {
+	int mayor_cantidad_de_partidas = 45;
+	char jugador_cantidad_de_partidas[] = "jugador_cantidad_de_partidas";
+	
+	char jugador_cantidad_de_ganados[] = "jugador_cantidad_de_ganados";
+	int cantidad_de_ganados = 0;
+	
+	int mayor_puntaje=69;
+	char jugador_mayor_puntaje[] = "jugador_mayor_puntaje";
+	
+	int mayor_puntaje_solicito = 3;
+	
+	int total_completos = 5;
+	int completos_ingenieros = 2;
+	int completos_abogados = 1;
+	int completos_contadores = 2;
+		
+	printf(".*.*.*.*.*.*.*.*.*.*.*.*. ESTADISTICAS DEL CRUCIGRAMA .*.*.*.*.*.*.*.*.*.*.*.");
+	printf("\n\n\n\n");
+	printf("(*) El jugador que mas veces jugo crucigramas es: %s.\n", jugador_cantidad_de_partidas);
+	if (cantidad_de_ganados > 0) {
+		printf("\n(*) El jugador que mas veces obtuvo un puntaje perfecto, es decir, 75 puntos es %s.\n", jugador_cantidad_de_ganados);
+		printf("\n(*) La cantidad de curcigramas completos son: %i\n", total_completos);
+		printf("\n(*)Dentro de los crucigrgamas completos podemos detallar:\n");
+		printf("\n(*) Del total de crucigramas completos %.2f%% son de abogados\n", (float) completos_abogados / total_completos * 100);
+		printf("\n(*) Del total de crucigramas completos %.2f%% son de contadores\n", (float) completos_contadores / total_completos * 100);
+		printf("\n(*) Del total de crucigramas completos %.2f%% son de ingenieros\n", (float) completos_ingenieros / total_completos * 100);
+		
+	} else {
+		printf("\n(*) El jugador que obtuvo el puntaje mas alto en el juego es: %s\n", jugador_mayor_puntaje);
+		printf("\n(*) Su mayor puntaje es %d\n", mayor_puntaje); /*El mayor punaje del usuario que pide las estadisticas*/
+	}
+// Esto corresponde a la funcion palydef_estadisticas
+//	/*buscamos la palabra mas adivinada.. si s una solo imprimimos una y si son varias se imrimen esas varias*/
+//	printf("\n(*) La palabra mas adivinada es OGRO\n"); /*ogro es ejemplo :P */
+//	/*idem para la o las palabras menos adivinadas*/
+//	printf("\n(*) La palabra menos adivinada es CASA\n");
+//	printf("\n(*) El porcentaje de palabras acertadas terminadas con la letra O es: 46.12\n");
+//	printf("\n(*) El porcentaje de palabras que contienen la letra R en algun lugar de la palabra es : 65.24\n");
+//	
+//	printf(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.");
+}
+
