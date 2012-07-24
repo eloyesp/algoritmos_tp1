@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #define  TAM 13
 #define  CUIL 15
+#define  USUARIOS "usuarios.dat"
 
 int profesion_valida(const char profesion[]);
 void cargar_fecha(Fecha * fecha);
@@ -17,7 +18,7 @@ void usuario_alta() {
 	Usuario nuevo_usuario;
 	char ingreso[MAX_NOMBRE];	
 
-	usuarios = fopen("usuarios.dat", "ab+");
+	usuarios = fopen(USUARIOS, "ab+");
 	
 	if (usuarios != NULL) {
 		// Ingreso de datos
@@ -156,6 +157,20 @@ int cantidad_de_registros(FILE * usuarios) {
 }
 
 void usuario_estadisticas(void) {
+	
+//	Usuario usuario;
+//	FILE * usuarios; 
+//	usuarios = fopen(USUARIOS, "rb+");
+//	
+//	if (usuarios == NULL)
+//		printf("El archivo no se pudo abrir.");
+//	else {
+//		while (!feof(usuarios)) {
+//		fread(&usuario, sizeof() )	
+//		}
+//		
+//	}
+	
 	int mayor_cantidad_de_partidas = 45;
 	char jugador_cantidad_de_partidas[] = "jugador_cantidad_de_partidas";
 	
@@ -187,3 +202,22 @@ void usuario_estadisticas(void) {
 	}
 }
 
+void usuario_cargar_puntaje(const int nro_usuario, const int puntaje) {
+	Usuario usuario;
+	FILE * usuarios; 
+	usuarios = fopen(USUARIOS, "rb+");
+	if (usuarios != NULL) {
+		fseek(usuarios, (nro_usuario - 1) * sizeof(Usuario), SEEK_SET);
+		fread(&usuario, sizeof(Usuario), 1, usuarios);
+		usuario.partidas_jugadas++;
+		if (puntaje==75)
+			usuario.crucigramas_completos++;
+		if (usuario.mayor_puntaje < puntaje)
+			usuario.mayor_puntaje = puntaje;
+		fseek(usuarios, (nro_usuario - 1) * sizeof(Usuario), SEEK_SET);
+		fwrite(&usuario, sizeof(Usuario), 1, usuarios);
+		fclose(usuarios);
+	} else {
+		printf("No se pudo abrir el archivo...");
+	}
+}
