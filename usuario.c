@@ -15,7 +15,7 @@ int cantidad_de_registros(FILE * usuarios);
 void usuario_alta() {
 	FILE * usuarios;
 	Usuario nuevo_usuario;
-	char ingreso[MAX_NOMBRE];
+	char ingreso[MAX_NOMBRE];	
 
 	usuarios = fopen("usuarios.dat", "ab+");
 	
@@ -35,6 +35,10 @@ void usuario_alta() {
 		printf("Fecha de ingreso al colegio:\n");
 		cargar_fecha(&nuevo_usuario.inscripcion);
 		nuevo_usuario.num_usuario = cantidad_de_registros(usuarios) + 1;
+		//pongo en cero las estadisticas 
+		nuevo_usuario.partidas_jugadas = 0;
+		nuevo_usuario.crucigramas_completos = 0;
+		nuevo_usuario.mayor_puntaje = -1;
 		// Registro en el archivo
 		fseek(usuarios, (nuevo_usuario.num_usuario - 1) * sizeof(Usuario), SEEK_SET);
 		fwrite(&nuevo_usuario, sizeof(Usuario), 1, usuarios);

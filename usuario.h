@@ -13,6 +13,9 @@ typedef struct {
 	int dni;
 	Fecha nacimiento, inscripcion;
 	char profesion[MAX_NOMBRE];
+	int partidas_jugadas;
+	int mayor_puntaje;
+	int crucigramas_completos;
 } Usuario;
 
 void usuario_alta(void);
