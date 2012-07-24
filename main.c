@@ -39,7 +39,7 @@ void mostrar_grilla_horizontal(void);
 char guion_asterisco(const int i, const int j);
 int cargar_palabra(void);
 int palabra_valida(const char input[]);
-void resultados(void);
+void resultados(const int num_usuario);
 int asignar_puntaje(const int fila, const int palabra);
 
 // Funcion main
@@ -119,12 +119,12 @@ void jugar()
 	*/
 	char entrada[3];
 	int opcion;
-	int usuario;
+	int num_usuario;
 	
 	// pedir cuil
-	usuario = usuario_login();
+	num_usuario = usuario_login();
 	
-	if (usuario == -2) {
+	if (num_usuario == -2) {
 		printf("Su cuil no es correcto");
 		return;
 	}
@@ -152,7 +152,7 @@ void jugar()
 	while(cargar_palabra()) {
 		mostrar_grilla();
 	}
-	resultados();
+	resultados(num_usuario);
 }
 
 void despedida() {
@@ -309,7 +309,7 @@ int palabra_valida(const char input[]) {
 	return valida;
 }
 
-void resultados() {
+void resultados(const int num_usuario) {
 	/** Indica al usuario el puntaje obtenido, asi como sus aciertos y errores.
 	*/
 	int i, j, totalpuntos = 0;
@@ -330,6 +330,7 @@ void resultados() {
 	
 	// Puntaje
 	printf("puntaje: %d de 75 (%.2f %%)\n",  totalpuntos, (float) totalpuntos / 75 * 100 );
+	usuario_cargar_puntaje(num_usuario, totalpuntos);
 	PAUSE();
 }
 
