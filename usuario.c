@@ -82,16 +82,16 @@ int usuario_login(void) {
 }
 
 int profesion_valida(const char profesion[]) {
-	int bien = 0, i = 0;
+	int tiene_profesion = 0, i = 0;
 	const char * profesiones[] = { "contador", "abogado", "ingeniero"};
 	
-	while (!bien && i < 3) {
+	while (!tiene_profesion && i < 3) {
 		if (!strcmp(profesion, profesiones[i])) {
-			bien = 1;
+			tiene_profesion = 1;
 		}
 		i++;
 	}
-	return bien;
+	return tiene_profesion;
 }
 
 void cargar_fecha(Fecha * fecha){
