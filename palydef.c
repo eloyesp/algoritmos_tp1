@@ -187,8 +187,29 @@ char * palydef_definicion(const int palabra) {
 	return def[palabra];
 }
 
-int palydef_coincide(char * palabra, int respuesta) {
-	return 0;
+int palydef_coincide(const char * palabra, const int respuesta) {
+	/** Chequea si la palabra coincide con la respuesta, agrega las estadisticas
+		y retorna el puntaje correspondiente, o -1 si la palabra esta vacia o -2
+		si la palabra esta errada.
+	*/
+	int correcta = 0, i = 0;
+
+	// Chequea si coincide.
+	while ( pal[respuesta][i] != '\0' && correcta == 0) {
+		if ( palabra[i] == '-')
+			correcta = -1;
+		else if ( palabra[i] != pal[respuesta][i] )
+			correcta = -2;
+		i++;
+	}
+
+	// Carga las estadisticas y da el mensaje correspondiente.
+	if ( correcta == 0 ) {
+		correcta = i;
+		// TODO: cargar las estadisticas: palydefs[respuesta].acertada += 1;
+	}
+
+	return correcta;
 }
 
 void palydef_estadisticas(void) {

@@ -341,25 +341,15 @@ void resultados(const int num_usuario) {
 }
 
 int asignar_puntaje(const int fila, const int palabra){
-	int d, j=0, correcta = 0, cantidad_de_letras, puntos;
-	d = palabra * 6;
-	cantidad_de_letras = de_tres_letras(fila, palabra, sentido) ? 3 : 4;
+	int puntos;
 	
-	while ( j<cantidad_de_letras && correcta == 0) {
-		if (grilla[fila][j+d] == '-')
-			correcta = 1;
-		else if (grilla[fila][j+d] != pal[respuestas[fila][palabra]][j])
-			correcta = 2;
-		j++;
-	}
+	puntos = palydef_coincide(&grilla[fila][palabra * 6], respuestas[fila][palabra]);
 	
-	if (correcta == 0)
-		puntos = cantidad_de_letras;
-	else if (correcta==1) {
+	if ( puntos == -1 ) {
 		puntos = 0;
 		printf("La palabra %d de la fila %d esta vacia.\n", palabra+1, fila+1);
-	} else {
-		puntos=0;
+	} else if ( puntos == -2 ){
+		puntos = 0;
 		printf("La palabra %d de la fila %d esta incorrecta.\n", palabra+1, fila+1);
 	}
 
