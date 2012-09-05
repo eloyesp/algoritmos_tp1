@@ -297,6 +297,10 @@ int cargar_palabra() {
 }
 
 int palabra_valida(const char input[]) {
+	/** Valida una palabra ingresada por el usuario.
+		Si no es valida, da el mensaje de error y retorna 0.
+		Retorna 1 si la palabra es valida. 
+	*/
 	int i=0, valida = 1;
 	char c;
 	c = input[i];
