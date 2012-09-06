@@ -229,7 +229,20 @@ void palydef_estadisticas(void) {
 	int palabras_adivinadas = 0;
 	int palabras_acertadas_terminadas_en_o = 0;
 	int palabras_acertadas_con_r = 0;
-	// TODO: leer los registros reales;
+	
+	Estadistica estadistica;
+	FILE * estadisticas;
+	estadisticas = fopen(ESTADISTICAS, "rb");
+	
+	if (estadisticas == NULL)
+		printf("El archivo no se pudo abrir.");
+	else {
+		while (fread(&estadistica, sizeof(Estadistica), 1, estadisticas)) {
+			// TODO: leer
+		}
+		fclose(estadisticas);
+	}
+
 //	char palabra_mas_adivinada[] = "Ogro";
 //	char palabra_menos_adivinada[] = "Casa";
 //	int palabras_adivinadas = 335;
