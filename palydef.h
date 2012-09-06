@@ -1,6 +1,11 @@
 #ifndef PALYDEF_H
 #define PALYDEF_H
 
+typedef struct {
+	int id;
+	int aciertos;
+} Estadistica;
+
 char pal[50][5], def[50][40];
 
 void palydef_inicializar(void);

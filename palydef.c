@@ -5,7 +5,10 @@
 #include "palydef.h"
 #include "utils.h"
 
+#define  ESTADISTICAS "estadisticas.dat"
+
 int ya_esta(const int valor, const int index, int respuestas[][2]);
+void cargar_estadistica(const int respuesta);
 
 void palydef_inicializar(void)
 	/** Inicializa los vectores pal[] y def[]
@@ -206,24 +209,42 @@ int palydef_coincide(const char * palabra, const int respuesta) {
 	// Carga las estadisticas y da el mensaje correspondiente.
 	if ( correcta == 0 ) {
 		correcta = i;
-		// TODO: cargar las estadisticas: palydefs[respuesta].acertada += 1;
+		cargar_estadistica(respuesta);
 	}
 
 	return correcta;
 }
 
+void cargar_estadistica(const int respuesta) {
+	// TODO: cargar las estadisticas: palydefs[respuesta].acertada += 1;
+	return;
+}
+
+
 void palydef_estadisticas(void) {
-	char palabra_mas_adivinada[] = "Ogro";
-	char palabra_menos_adivinada[] = "Casa";
-	int palabras_adivinadas = 335;
-	int palabras_acertadas_terminadas_en_o = 13;
-	int palabras_acertadas_con_r = 200;
+	char * palabra_mas_adivinada;
+	int palabra_mas_adivinada_cantidad = 0;
+	char * palabra_menos_adivinada;
+	int palabra_menos_adivinada_cantidad = -1;
+	int palabras_adivinadas = 0;
+	int palabras_acertadas_terminadas_en_o = 0;
+	int palabras_acertadas_con_r = 0;
+	// TODO: leer los registros reales;
+//	char palabra_mas_adivinada[] = "Ogro";
+//	char palabra_menos_adivinada[] = "Casa";
+//	int palabras_adivinadas = 335;
+//	int palabras_acertadas_terminadas_en_o = 13;
+//	int palabras_acertadas_con_r = 200;
 	
 	/*buscamos la palabra mas adivinada.. si s una solo imprimimos una y si son varias se imrimen esas varias*/
-	printf("\n(*) La palabra mas adivinada es %s\n", palabra_mas_adivinada);
-	printf("\n(*) La palabra menos adivinada es %s\n", palabra_menos_adivinada);
-	printf("\n(*) El porcentaje de palabras acertadas terminadas con la letra O es: %.2f%%\n", (float) palabras_acertadas_terminadas_en_o / palabras_adivinadas);
-	printf("\n(*) El porcentaje de palabras acertadas que contienen la letra R en algun lugar de la palabra es : %.2f%%\n", (float) palabras_acertadas_con_r / palabras_adivinadas);
+	if (palabras_adivinadas != 0) {
+		printf("\n(*) La palabra mas adivinada es %s\n", palabra_mas_adivinada);
+		printf("\n(*) La palabra menos adivinada es %s\n", palabra_menos_adivinada);
+		printf("\n(*) El porcentaje de palabras acertadas terminadas con la letra O es: %.2f%%\n", (float) palabras_acertadas_terminadas_en_o / palabras_adivinadas);
+		printf("\n(*) El porcentaje de palabras acertadas que contienen la letra R en algun lugar de la palabra es : %.2f%%\n", (float) palabras_acertadas_con_r / palabras_adivinadas);
+	} else {
+		printf("\n No hay registros sobre palabras acertadas\n");
+	}
 }
 
 int ya_esta(const int valor, const int index, int respuestas[][2]) {
