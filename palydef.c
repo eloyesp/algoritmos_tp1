@@ -216,7 +216,20 @@ int palydef_coincide(const char * palabra, const int respuesta) {
 }
 
 void cargar_estadistica(const int respuesta) {
-	// TODO: cargar las estadisticas: palydefs[respuesta].acertada += 1;
+	Estadistica estadistica;
+	FILE * estadisticas;
+	estadisticas = fopen(ESTADISTICAS, "ab+");
+	
+	if (estadisticas == NULL)
+		printf("El archivo no se pudo abrir.");
+	else {
+		fseek(estadisticas, sizeof(Estadistica) * (respuesta - 1), SEEK_SET);
+		fread(&estadistica, sizeof(Estadistica), 1, estadisticas);
+		estadistica.aciertos += 1;
+		fseek(estadisticas, - sizeof(Estadistica), SEEK_CUR);
+		fwrite(&estadistica, sizeof(Estadistica), 1, estadisticas);
+		fclose(estadisticas);
+	}
 	return;
 }
 
