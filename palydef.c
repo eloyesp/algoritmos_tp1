@@ -280,7 +280,7 @@ void palydef_estadisticas(void) {
 				palabras_acertadas_terminadas_en_o += estadistica.aciertos;
 			if (con_r(pal[estadistica.id]))
 				palabras_acertadas_con_r += estadistica.aciertos;
-			// TODO: leer
+			// TODO: chequear las palabras mas y menos acertadas.
 		}
 		fclose(estadisticas);
 	}
@@ -309,9 +309,11 @@ int ya_esta(const int valor, const int index, int respuestas[][2]) {
 }
 
 int terminada_en_o(const char * const palabra) {
+	// TODO: implementar
 	return 0;
 }
 int con_r(const char * const palabra) {
+	// TODO: implementar
 	return 0;
 }
 
