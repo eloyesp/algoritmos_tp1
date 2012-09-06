@@ -281,7 +281,14 @@ void palydef_estadisticas(void) {
 				palabras_acertadas_terminadas_en_o += estadistica.aciertos;
 			if (con_r(pal[estadistica.id]))
 				palabras_acertadas_con_r += estadistica.aciertos;
-			// TODO: chequear las palabras mas y menos acertadas.
+			if (palabra_mas_adivinada_cantidad <= estadistica.aciertos) {
+				palabra_mas_adivinada_cantidad = estadistica.aciertos;
+				palabra_mas_adivinada = pal[estadistica.id];
+			}
+			if (palabra_menos_adivinada_cantidad >= estadistica.aciertos) {
+				palabra_menos_adivinada_cantidad = estadistica.aciertos;
+				palabra_menos_adivinada = pal[estadistica.id];
+			}
 		}
 		fclose(estadisticas);
 	}
@@ -289,8 +296,8 @@ void palydef_estadisticas(void) {
 	/*buscamos la palabra mas adivinada.. si es una solo imprimimos una y si son varias se imrimen esas varias*/
 	if (palabras_adivinadas != 0) {
 		printf("\nPalabras adivinadas: %i\n", palabras_adivinadas);
-		printf("\n(*) La palabra mas adivinada es %s\n", palabra_mas_adivinada);
-		printf("\n(*) La palabra menos adivinada es %s\n", palabra_menos_adivinada);
+		printf("\n(*) La palabra mas adivinada es \"%s\" que ha sido adivinada %i veces\n", palabra_mas_adivinada, palabra_mas_adivinada_cantidad);
+		printf("\n(*) La palabra menos adivinada es \"%s\" que ha sido adivinada %i veces\n", palabra_menos_adivinada, palabra_menos_adivinada_cantidad);
 		printf("\n(*) El porcentaje de palabras acertadas terminadas con la letra O es: %.2f%%\n", (float) palabras_acertadas_terminadas_en_o / palabras_adivinadas);
 		printf("\n(*) El porcentaje de palabras acertadas que contienen la letra R en algun lugar de la palabra es : %.2f%%\n", (float) palabras_acertadas_con_r / palabras_adivinadas);
 	} else {
