@@ -218,11 +218,27 @@ int palydef_coincide(const char * palabra, const int respuesta) {
 void cargar_estadistica(const int respuesta) {
 	Estadistica estadistica;
 	FILE * estadisticas;
-	estadisticas = fopen(ESTADISTICAS, "ab+");
+	estadisticas = fopen(ESTADISTICAS, "rb+");
+	int i;
 	
-	if (estadisticas == NULL)
-		printf("El archivo no se pudo abrir.");
-	else {
+	if (estadisticas == NULL) {
+		// Si no hay archivo de estadisticas creo uno vacio
+		estadisticas = fopen(ESTADISTICAS, "w");
+		if (estadisticas == NULL) {
+			printf("algo malo a ocurrido!");
+		} else {
+			estadistica.aciertos = 0;
+			for (i=0; i<50; i++) {
+				estadistica.id = i;
+				fwrite(&estadistica, sizeof(Estadistica), 1, estadisticas);
+			}
+			// y hacemos lo que vinimos a hacer
+			fseek(estadisticas, sizeof(Estadistica) * (respuesta - 1), SEEK_SET);
+			estadistica.aciertos += 1;
+			fwrite(&estadistica, sizeof(Estadistica), 1, estadisticas);
+			fclose(estadisticas);
+		}
+	} else {
 		fseek(estadisticas, sizeof(Estadistica) * (respuesta - 1), SEEK_SET);
 		fread(&estadistica, sizeof(Estadistica), 1, estadisticas);
 		estadistica.aciertos += 1;
@@ -238,7 +254,7 @@ void palydef_estadisticas(void) {
 	char * palabra_mas_adivinada;
 	int palabra_mas_adivinada_cantidad = 0;
 	char * palabra_menos_adivinada;
-	int palabra_menos_adivinada_cantidad = -1;
+	int palabra_menos_adivinada_cantidad = 0;
 	int palabras_adivinadas = 0;
 	int palabras_acertadas_terminadas_en_o = 0;
 	int palabras_acertadas_con_r = 0;
@@ -248,9 +264,11 @@ void palydef_estadisticas(void) {
 	estadisticas = fopen(ESTADISTICAS, "rb");
 	
 	if (estadisticas == NULL)
-		printf("El archivo no se pudo abrir.");
+		printf("El archivo de estadisticas no se pudo abrir.");
 	else {
 		while (fread(&estadistica, sizeof(Estadistica), 1, estadisticas)) {
+			palabras_adivinadas += estadistica.aciertos;
+			
 			// TODO: leer
 		}
 		fclose(estadisticas);
@@ -264,10 +282,11 @@ void palydef_estadisticas(void) {
 	
 	/*buscamos la palabra mas adivinada.. si s una solo imprimimos una y si son varias se imrimen esas varias*/
 	if (palabras_adivinadas != 0) {
-		printf("\n(*) La palabra mas adivinada es %s\n", palabra_mas_adivinada);
-		printf("\n(*) La palabra menos adivinada es %s\n", palabra_menos_adivinada);
-		printf("\n(*) El porcentaje de palabras acertadas terminadas con la letra O es: %.2f%%\n", (float) palabras_acertadas_terminadas_en_o / palabras_adivinadas);
-		printf("\n(*) El porcentaje de palabras acertadas que contienen la letra R en algun lugar de la palabra es : %.2f%%\n", (float) palabras_acertadas_con_r / palabras_adivinadas);
+		printf("\n%i\n", palabras_adivinadas);
+//		printf("\n(*) La palabra mas adivinada es %s\n", palabra_mas_adivinada);
+//		printf("\n(*) La palabra menos adivinada es %s\n", palabra_menos_adivinada);
+//		printf("\n(*) El porcentaje de palabras acertadas terminadas con la letra O es: %.2f%%\n", (float) palabras_acertadas_terminadas_en_o / palabras_adivinadas);
+//		printf("\n(*) El porcentaje de palabras acertadas que contienen la letra R en algun lugar de la palabra es : %.2f%%\n", (float) palabras_acertadas_con_r / palabras_adivinadas);
 	} else {
 		printf("\n No hay registros sobre palabras acertadas\n");
 	}
