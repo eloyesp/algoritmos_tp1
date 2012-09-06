@@ -225,9 +225,9 @@ void cargar_estadistica(const int respuesta) {
 	
 	if (estadisticas == NULL) {
 		// Si no hay archivo de estadisticas creo uno vacio
-		estadisticas = fopen(ESTADISTICAS, "w");
+		estadisticas = fopen(ESTADISTICAS, "wb");
 		if (estadisticas == NULL) {
-			printf("algo malo a ocurrido!");
+			printf("algo malo ha ocurrido!");
 		} else {
 			estadistica.aciertos = 0;
 			for (i=0; i<50; i++) {
@@ -235,8 +235,9 @@ void cargar_estadistica(const int respuesta) {
 				fwrite(&estadistica, sizeof(Estadistica), 1, estadisticas);
 			}
 			// y hacemos lo que vinimos a hacer
-			fseek(estadisticas, sizeof(Estadistica) * (respuesta - 1), SEEK_SET);
+			fseek(estadisticas, sizeof(Estadistica) * (respuesta), SEEK_SET);
 			estadistica.aciertos += 1;
+			estadistica.id = respuesta;
 			fwrite(&estadistica, sizeof(Estadistica), 1, estadisticas);
 			fclose(estadisticas);
 		}
