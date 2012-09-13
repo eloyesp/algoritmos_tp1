@@ -274,12 +274,10 @@ void palydef_estadisticas(void) {
 		palabras_adivinadas += estadistica.aciertos;
 		palabra_mas_adivinada = palabra_menos_adivinada = pal[0];
 		palabra_mas_adivinada_cantidad = palabra_menos_adivinada_cantidad = estadistica.aciertos;
-		puts("");
 		while (fread(&estadistica, sizeof(Estadistica), 1, estadisticas)) {
 			palabras_adivinadas += estadistica.aciertos;
 			if (terminada_en_o(pal[estadistica.id]))
 				palabras_acertadas_terminadas_en_o += estadistica.aciertos;
-			printf("%s : %i \n", pal[estadistica.id], con_r(pal[estadistica.id]));
 			if (con_r(pal[estadistica.id]))
 				palabras_acertadas_con_r += estadistica.aciertos;
 			// TODO: que pasa cuando hay 5 palabras con el maximo de aciertos
@@ -319,8 +317,15 @@ int ya_esta(const int valor, const int index, int respuestas[][2]) {
 }
 
 int terminada_en_o(const char * const palabra) {
-	// TODO: implementar
-	return 0;
+	int i = 0, encontrado = 0;
+	
+	while( palabra[i] != '\0') {
+		i++;
+	}
+	if('o' == palabra[i-1])
+		encontrado = 1;
+	
+	return encontrado;
 }
 int con_r(const char * const palabra) {
 	int i = 0, encontrado = 0;
