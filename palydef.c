@@ -281,6 +281,7 @@ void palydef_estadisticas(void) {
 				palabras_acertadas_terminadas_en_o += estadistica.aciertos;
 			if (con_r(pal[estadistica.id]))
 				palabras_acertadas_con_r += estadistica.aciertos;
+			// TODO: que pasa cuando hay 5 palabras con el maximo de aciertos
 			if (palabra_mas_adivinada_cantidad <= estadistica.aciertos) {
 				palabra_mas_adivinada_cantidad = estadistica.aciertos;
 				palabra_mas_adivinada = pal[estadistica.id];
