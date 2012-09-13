@@ -323,13 +323,12 @@ int terminada_en_o(const char * const palabra) {
 	return 0;
 }
 int con_r(const char * const palabra) {
-	// TODO: implementar
-	int i = 0;
-	while( palabra[i] != '\0') {
+	int i = 0, encontrado = 0;
+	while( !encontrado && palabra[i] != '\0') {
 		if ('r' == palabra[i])
-			return 1;
+			encontrado = 1;
 		i++;
 	}
-	return 0;
+	return encontrado;
 }
 
