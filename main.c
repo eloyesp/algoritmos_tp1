@@ -126,6 +126,7 @@ void jugar()
 	
 	if (num_usuario == -2) {
 		printf("Su cuil no es correcto");
+		PAUSE();
 		return;
 	}
 	
