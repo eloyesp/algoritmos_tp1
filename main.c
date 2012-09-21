@@ -18,6 +18,7 @@ Roberto Cavalcabué			eltotti_38@hotmail.com
 #include "palydef.h"
 #include "usuario.h"
 #include "utils.h"
+#define  USUARIOS "usuarios.dat"
 
 /**   Variables globales:
 */
@@ -33,7 +34,7 @@ int menu(); // retorna falso si el usuario elige terminar ('t' o 'T')
 void jugar(void);
 void despedida(void);
 void vaciar_grilla(void);
-void mostrar_grilla(void);
+void mostrar_grilla(Usuario usuario);
 void mostrar_grilla_vertical(void);
 void mostrar_grilla_horizontal(void);
 char guion_asterisco(const int i, const int j);
@@ -121,21 +122,51 @@ void jugar()
 	char entrada[3];
 	int opcion;
 	int num_usuario;
-	
-	// pedir cuil
-	num_usuario = usuario_login();
-	
-	if (num_usuario == -2) {
-		printf("Su cuil no es correcto");
-		PAUSE();
-		return;
-	}
-	
+	int dni,encontrado=0;
+	Usuario usuario;
+
+
 	printf("\n\n"
 		"                          1) Horizontal.\n\n"
 		"                          2) Vertical.\n\n"
 		"                      Ingrese una opcion valida: ");
 	read_line(entrada, 3);
+
+
+	/* Pedir CUIL */
+
+	system("cls");
+
+	dni = usuario_login();
+
+	if (dni == -2) {
+		printf("Su cuil no es correcto\n\n");
+		system("pause");
+		return;
+	}
+
+	FILE *ptr;
+
+	ptr = fopen(USUARIOS,"rb+");
+
+
+	rewind(ptr);
+
+	while (!feof(ptr) && encontrado!=1){
+		fread(&usuario, sizeof(Usuario), 1, ptr);
+		if(usuario.dni == dni){
+			encontrado = 1;
+
+
+		}
+	}
+	system("cls");
+
+
+	fclose(ptr);
+
+
+
 	opcion = atoi(entrada);
 	while(opcion!=1 && opcion!=2){
 		printf("Ingreso una opcion incorrecta.\nIngrese nuevamente la opcion que desea: ");
@@ -146,13 +177,13 @@ void jugar()
 		sentido = 'H';
 	else
 		sentido = 'V';
-	
+
 	vaciar_grilla();
 	palydef_elegir_palabras(respuestas, sentido);
-	
-	mostrar_grilla();
+
+	mostrar_grilla(usuario);
 	while(cargar_palabra()) {
-		mostrar_grilla();
+		mostrar_grilla(usuario);
 	}
 	resultados(num_usuario);
 }
@@ -196,12 +227,15 @@ char guion_asterisco(const int i, const int j) {
 	return value;
 }
 
-void mostrar_grilla(void) {
+void mostrar_grilla(Usuario usuario) {
 	/** Muestra al usuario la grilla (en su estado actual) y las definiciones.
 	*/
 	int i,j;
 	char fila_columna[8];
 	system("cls");
+
+	printf("Usuario registrado: %s %s, %d, %s\n\n",usuario.nombre,usuario.apellido,usuario.dni,usuario.profesion);
+
 	if (sentido == 'H') {
 		strcpy(fila_columna, "Fila");
 		printf("----****----****----**** Crucigrama Horizontal ****----****----****----\n\n\n");

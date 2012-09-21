@@ -12,21 +12,28 @@ int profesion_valida(const char profesion[]);
 void cargar_fecha(Fecha * fecha);
 int validar_cuil(char * ingreso);
 int cantidad_de_registros(FILE * usuarios);
+int DNI = 0;
 
 void usuario_alta() {
 	FILE * usuarios;
 	Usuario nuevo_usuario;
-	char ingreso[MAX_NOMBRE];	
-
+	char ingreso[MAX_NOMBRE];
+	char profesion[8] = "abogado\0";
+	char profesion1[10] = "ingeniero\0";
+	char profesion2[9] = "contador\0";
 	usuarios = fopen(USUARIOS, "ab+");
-	
+
 	if (usuarios != NULL) {
 		// Ingreso de datos
-		printf("Ingrese la profesion: ");
+		printf("Ingrese la Profesion: ");
 		read_line(nuevo_usuario.profesion, MAX_NOMBRE);
+		while(strcmp(profesion,nuevo_usuario.profesion) != 0 && strcmp(profesion1,nuevo_usuario.profesion) != 0 && strcmp(profesion2,nuevo_usuario.profesion) != 0){
+			printf("Ingrese la Profesion: ");
+			read_line(nuevo_usuario.profesion, MAX_NOMBRE);
+		}
 		printf("Ingrese Nombre: ");
 		read_line(nuevo_usuario.nombre, MAX_NOMBRE);
-		printf("Apellido: ");
+		printf("Ingrese Apellido: ");
 		read_line(nuevo_usuario.apellido, MAX_NOMBRE);
 		printf("DNI: ");
 		read_line(ingreso, MAX_NOMBRE);
@@ -77,8 +84,9 @@ int usuario_login(void) {
 			}
 		}
 	}
-	
-	return num_usuario;
+
+
+	return dni;
 }
 
 int profesion_valida(const char profesion[]) {
