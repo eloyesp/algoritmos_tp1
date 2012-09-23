@@ -274,3 +274,13 @@ void usuario_cargar_puntaje(Usuario usuario, const int puntaje) {
 		printf("No se pudo abrir el archivo...");
 	}
 }
+
+void usuario_cabecera(const Usuario usuario) {
+	if (usuario.num_usuario == -1)
+		printf("Usuario no registrado - [%s]\n", usuario.nombre);
+	else
+		printf("Usuario registrado: %s %s, %d, %s\n\n", 
+		usuario.nombre, usuario.apellido, usuario.dni, 
+		usuario.profesion);
+}
+

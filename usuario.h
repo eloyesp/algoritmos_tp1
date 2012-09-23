@@ -27,4 +27,5 @@ int usuario_login(Usuario * usuario);
 // (-2): cuil invalido
 void usuario_cargar_puntaje(const Usuario usuario, const int puntaje);
 void usuario_estadisticas(void);
+void usuario_cabecera(const Usuario usuario);
 #endif

@@ -204,12 +204,7 @@ void mostrar_grilla(Usuario usuario) {
 	char fila_columna[8];
 	system("cls");
 	
-	if (usuario.num_usuario == -1)
-		printf("Usuario no registrado - [%s]\n", usuario.nombre);
-	else
-		printf("Usuario registrado: %s %s, %d, %s\n\n", 
-		       usuario.nombre, usuario.apellido, usuario.dni, 
-		       usuario.profesion);
+	usuario_cabecera(usuario);
 
 	if (sentido == 'H') {
 		strcpy(fila_columna, "Fila");
