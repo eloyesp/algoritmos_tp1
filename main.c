@@ -215,7 +215,7 @@ void mostrar_grilla(Usuario usuario) {
 	system("cls");
 	
 	if (usuario.num_usuario == -1)
-		printf("Usuario no registrado - [%s]", usuario.nombre);
+		printf("Usuario no registrado - [%s]\n", usuario.nombre);
 	else
 		printf("Usuario registrado: %s %s, %d, %s\n\n", 
 		       usuario.nombre, usuario.apellido, usuario.dni, 
@@ -361,7 +361,8 @@ void resultados(const Usuario usuario) {
 	
 	// Puntaje
 	printf("puntaje: %d de 75 (%.2f %%)\n",  totalpuntos, (float) totalpuntos / 75 * 100 );
-	usuario_cargar_puntaje(usuario, totalpuntos);
+	if (usuario.num_usuario != -1)
+		usuario_cargar_puntaje(usuario, totalpuntos);
 	PAUSE();
 }
 

@@ -82,10 +82,10 @@ void usuario_login(Usuario * usuario) {
 					encontrado = 1;
 				}
 			}
-			if (encontrado == 0) {
-				usuario->num_usuario = -1;
-				strcpy(usuario->nombre, ingreso);
-			}
+		}
+		if (encontrado == 0) {
+			usuario->num_usuario = -1;
+			strcpy(usuario->nombre, ingreso);
 		}
 	}
 }
