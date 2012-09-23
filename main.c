@@ -124,48 +124,38 @@ void jugar()
 
 	/* Pedir CUIL */
 
-	system("cls");
-
-	usuario_login(&usuario);
-
-	if (usuario.num_usuario == -2) {
-		printf("Su cuil no es correcto\n\n");
-		system("pause");
-		return;
-	}
-
-	/* Horizontal o Vertical */
-
-	system("cls");
-
-	printf("\n\n"
-		"                          1) Horizontal.\n\n"
-		"                          2) Vertical.\n\n"
-		"                      Ingrese una opcion valida: ");
-	read_line(entrada, 3);
-	
-	opcion = atoi(entrada);
-	while(opcion!=1 && opcion!=2){
-		printf("Ingreso una opcion incorrecta.\nIngrese nuevamente la opcion que desea: ");
+	if (usuario_login(&usuario) != -2) {
+		/* Horizontal o Vertical */
+		system("cls");
+		printf("\n\n Seleccione el tipo de juego:\n\n"
+			"                          1) Horizontal.\n\n"
+			"                          2) Vertical.\n\n"
+			"                      Ingrese una opcion valida: ");
 		read_line(entrada, 3);
+		
 		opcion = atoi(entrada);
-	}
-	if (opcion == 1)
-		sentido = 'H';
-	else
-		sentido = 'V';
+		while(opcion!=1 && opcion!=2){
+			printf("Ingreso una opcion incorrecta.\nIngrese nuevamente la opcion que desea: ");
+			read_line(entrada, 3);
+			opcion = atoi(entrada);
+		}
+		if (opcion == 1)
+			sentido = 'H';
+		else
+			sentido = 'V';
 
-	/* Grilla */
+		/* Grilla */
 
-	vaciar_grilla();
-	palydef_elegir_palabras(respuestas, sentido);
+		vaciar_grilla();
+		palydef_elegir_palabras(respuestas, sentido);
 
-	mostrar_grilla(usuario);
-	while(cargar_palabra()) {
 		mostrar_grilla(usuario);
+		while (cargar_palabra()) {
+			mostrar_grilla(usuario);
+		}
+		
+		resultados(usuario);
 	}
-	
-	resultados(usuario);
 }
 
 void despedida() {

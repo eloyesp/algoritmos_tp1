@@ -21,7 +21,7 @@ typedef struct {
 void usuario_alta(void);
 // retorna 0 en caso de error.
 
-void usuario_login(Usuario * usuario);
+int usuario_login(Usuario * usuario);
 // Asigna el usuario correcto. El numero de usuario:
 // (-1): no registrado. (nombre => "cuil")
 // (-2): cuil invalido
