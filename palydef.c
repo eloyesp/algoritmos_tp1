@@ -242,7 +242,7 @@ void cargar_estadistica(const int respuesta) {
 			fclose(estadisticas);
 		}
 	} else {
-		fseek(estadisticas, sizeof(Estadistica) * (respuesta - 1), SEEK_SET);
+		fseek(estadisticas, sizeof(Estadistica) * (respuesta), SEEK_SET);
 		fread(&estadistica, sizeof(Estadistica), 1, estadisticas);
 		estadistica.aciertos += 1;
 		fseek(estadisticas, - sizeof(Estadistica), SEEK_CUR);
