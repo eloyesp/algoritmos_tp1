@@ -77,7 +77,7 @@ void usuario_login(Usuario * usuario) {
 			printf("El archivo no se pudo abrir.");
 		else {
 			while (encontrado == 0 && !feof(usuarios)) {
-				fread(&usuario, sizeof(Usuario), 1, usuarios);
+				fread(usuario, sizeof(Usuario), 1, usuarios);
 				if (dni == usuario->dni) {
 					encontrado = 1;
 				}
