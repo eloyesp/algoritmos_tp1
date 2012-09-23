@@ -58,35 +58,36 @@ void usuario_alta() {
 	
 	PAUSE();
 	return;
-}		
+}
 
-int usuario_login(void) {
-	Usuario usuario;
+void usuario_login(Usuario * usuario) {
 	FILE * usuarios; 
 	char ingreso[CUIL];
-	int dni, num_usuario = -1;
+	int dni, encontrado = 0;
 	
 	printf("Ingrese el numero de CUIL (Ej. 99-99999999-9): ");
 	read_line(ingreso, CUIL);
 	dni = validar_cuil(ingreso);
+
 	if (dni == -2)
-		return dni;
+		usuario->num_usuario = -2;
 	else {
 		usuarios = fopen(USUARIOS, "rb");
 		if (usuarios == NULL)
 			printf("El archivo no se pudo abrir.");
 		else {
-			while (num_usuario == -1 && !feof(usuarios)) {
+			while (encontrado == 0 && !feof(usuarios)) {
 				fread(&usuario, sizeof(Usuario), 1, usuarios);
-				if (dni == usuario.dni) {
-					num_usuario = usuario.num_usuario;
+				if (dni == usuario->dni) {
+					encontrado = 1;
 				}
+			}
+			if (encontrado == 0) {
+				usuario->num_usuario = -1;
+				strcpy(usuario->nombre, ingreso);
 			}
 		}
 	}
-
-
-	return dni;
 }
 
 int profesion_valida(const char profesion[]) {
@@ -252,19 +253,16 @@ void usuario_estadisticas(void) {
 	}
 }
 
-void usuario_cargar_puntaje(const int nro_usuario, const int puntaje) {
-	Usuario usuario;
+void usuario_cargar_puntaje(Usuario usuario, const int puntaje) {
 	FILE * usuarios; 
 	usuarios = fopen(USUARIOS, "rb+");
 	if (usuarios != NULL) {
-		fseek(usuarios, (nro_usuario - 1) * sizeof(Usuario), SEEK_SET);
-		fread(&usuario, sizeof(Usuario), 1, usuarios);
+		fseek(usuarios, (usuario.num_usuario - 1) * sizeof(Usuario), SEEK_SET);
 		usuario.partidas_jugadas++;
 		if (puntaje==75)
 			usuario.crucigramas_completos++;
 		if (usuario.mayor_puntaje < puntaje)
 			usuario.mayor_puntaje = puntaje;
-		fseek(usuarios, (nro_usuario - 1) * sizeof(Usuario), SEEK_SET);
 		fwrite(&usuario, sizeof(Usuario), 1, usuarios);
 		fclose(usuarios);
 	} else {

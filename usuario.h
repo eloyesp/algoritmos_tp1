@@ -21,10 +21,10 @@ typedef struct {
 void usuario_alta(void);
 // retorna 0 en caso de error.
 
-int  usuario_login(void);
-// retorna un numero de usuario
-// (-1): no registrado
+void usuario_login(Usuario * usuario);
+// Asigna el usuario correcto. El numero de usuario:
+// (-1): no registrado. (nombre => "cuil")
 // (-2): cuil invalido
-void usuario_cargar_puntaje(const int nro_usuario, const int puntaje);
+void usuario_cargar_puntaje(const Usuario usuario, const int puntaje);
 void usuario_estadisticas(void);
 #endif

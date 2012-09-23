@@ -39,7 +39,7 @@ void mostrar_grilla_horizontal(void);
 char guion_asterisco(const int i, const int j);
 int cargar_palabra(void);
 int palabra_valida(const char input[]);
-void resultados(const int num_usuario);
+void resultados(const Usuario usuario);
 int asignar_puntaje(const int fila, const int palabra);
 
 // Funcion main
@@ -335,7 +335,7 @@ int palabra_valida(const char input[]) {
 	return valida;
 }
 
-void resultados(const int num_usuario) {
+void resultados(const Usuario usuario) {
 	/** Indica al usuario el puntaje obtenido, asi como sus aciertos y errores.
 	*/
 	int i, j, totalpuntos = 0;
@@ -356,7 +356,7 @@ void resultados(const int num_usuario) {
 	
 	// Puntaje
 	printf("puntaje: %d de 75 (%.2f %%)\n",  totalpuntos, (float) totalpuntos / 75 * 100 );
-	usuario_cargar_puntaje(num_usuario, totalpuntos);
+	usuario_cargar_puntaje(usuario, totalpuntos);
 	PAUSE();
 }
 
