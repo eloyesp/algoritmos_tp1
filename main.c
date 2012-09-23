@@ -18,7 +18,6 @@ Roberto Cavalcabué			eltotti_38@hotmail.com
 #include "palydef.h"
 #include "usuario.h"
 #include "utils.h"
-#define  USUARIOS "usuarios.dat"
 
 /**   Variables globales:
 */
@@ -121,52 +120,30 @@ void jugar()
 	*/
 	char entrada[3];
 	int opcion;
-	int num_usuario;
-	int dni,encontrado=0;
 	Usuario usuario;
 
+	/* Pedir CUIL */
+
+	system("cls");
+
+	usuario_login(&usuario);
+
+	if (usuario.num_usuario == -2) {
+		printf("Su cuil no es correcto\n\n");
+		system("pause");
+		return;
+	}
+
+	/* Horizontal o Vertical */
+
+	system("cls");
 
 	printf("\n\n"
 		"                          1) Horizontal.\n\n"
 		"                          2) Vertical.\n\n"
 		"                      Ingrese una opcion valida: ");
 	read_line(entrada, 3);
-
-
-	/* Pedir CUIL */
-
-	system("cls");
-
-	dni = usuario_login();
-
-	if (dni == -2) {
-		printf("Su cuil no es correcto\n\n");
-		system("pause");
-		return;
-	}
-
-	FILE *ptr;
-
-	ptr = fopen(USUARIOS,"rb+");
-
-
-	rewind(ptr);
-
-	while (!feof(ptr) && encontrado!=1){
-		fread(&usuario, sizeof(Usuario), 1, ptr);
-		if(usuario.dni == dni){
-			encontrado = 1;
-
-
-		}
-	}
-	system("cls");
-
-
-	fclose(ptr);
-
-
-
+	
 	opcion = atoi(entrada);
 	while(opcion!=1 && opcion!=2){
 		printf("Ingreso una opcion incorrecta.\nIngrese nuevamente la opcion que desea: ");
@@ -178,6 +155,8 @@ void jugar()
 	else
 		sentido = 'V';
 
+	/* Grilla */
+
 	vaciar_grilla();
 	palydef_elegir_palabras(respuestas, sentido);
 
@@ -185,7 +164,8 @@ void jugar()
 	while(cargar_palabra()) {
 		mostrar_grilla(usuario);
 	}
-	resultados(num_usuario);
+	
+	resultados(usuario);
 }
 
 void despedida() {
